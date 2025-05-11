@@ -17,3 +17,8 @@ include(${WORK_ROOT}/DevEnv/Common.cmake)
 #ukljuci drugi subroject - executable koji korisi myMath shared library
 include(FinanceTracker.cmake)
 
+target_include_directories(${FINANCE_TRACKER_NAME}
+		PRIVATE
+		${CMAKE_CURRENT_SOURCE_DIR}/common/include
+		${CMAKE_CURRENT_SOURCE_DIR}/src
+)
