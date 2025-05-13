@@ -14,6 +14,7 @@ endif ()
 set(WORK_ROOT ${HOME_ROOT}/Work)
 
 include(${WORK_ROOT}/DevEnv/Common.cmake)
+include(${WORK_ROOT}/DevEnv/DataProvider.cmake)
 include(FinanceTracker.cmake)
 
 target_include_directories(${FINANCE_TRACKER_NAME}
