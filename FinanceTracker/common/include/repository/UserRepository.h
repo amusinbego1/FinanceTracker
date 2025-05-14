@@ -6,9 +6,12 @@
 #define USERREPOSITORY_H
 
 #include "BaseRepository.h"
+#include <domain/User.h>
 
 class UserRepository: public BaseRepository{
 public:
+    static const char * INSERT_USER_SQL;
+
     static UserRepository& getInstance() {
         static UserRepository instance;
         return instance;
@@ -19,9 +22,12 @@ public:
     UserRepository(UserRepository&&) = delete;
     UserRepository& operator=(UserRepository&&) = delete;
 
+    void saveUser(const User&);
 
 private:
     UserRepository() = default;
+
+    td::String encryptPassword(const td::String&);
 
 };
 

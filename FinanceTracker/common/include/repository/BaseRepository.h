@@ -46,12 +46,14 @@ public:
         return true;
     }
 
+protected:
+    dp::IDatabasePtr _databasePtr;
+
 
 private:
 
     fo::fs::path _homePath;
     fo::fs::path _dbFullPath;
-    dp::IDatabasePtr _databasePtr;
 
 };
 
