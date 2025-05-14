@@ -8,6 +8,7 @@
 #include <crpt/SHA256.h>
 
 const char* UserRepository::INSERT_USER_SQL = "INSERT INTO users (username, password) VALUES (?, ?)";
+const char* UserRepository::FIND_USER_BY_USERNAME_AND_PASSWORD_SQL = "SELECT id FROM users WHERE username = ? AND password = ?";
 
 td::String UserRepository::encryptPassword(const td::String &password) {
     crpt::SHA256 sha256;
@@ -39,4 +40,29 @@ void UserRepository::saveUser(const User &user) {
     }
 
     transaction.commit();
+}
+
+std::optional<User> UserRepository::findUserByUsernameAndPassword(td::String username, td::String password) {
+    td::UINT4 user_id;
+    td::String encryptedPassword = encryptPassword(password);
+
+    dp::IStatementPtr pStatPtr(_databasePtr->createStatement(FIND_USER_BY_USERNAME_AND_PASSWORD_SQL));
+
+    td::Variant b_username(td::string8, td::nch, 30);
+    td::Variant b_password(td::string8, td::nch, 64);
+
+    dp::Columns columns(pStatPtr->allocBindColumns(1));
+    columns << "id" << user_id;
+
+    dp::Params params(pStatPtr->allocParams());
+    params << b_username << b_password;
+
+    b_username = username;
+    b_password = encryptedPassword;
+
+    if (!pStatPtr->execute() || !pStatPtr->moveNext())
+        return std::nullopt;
+
+
+    return User{user_id, username, encryptedPassword};
 }

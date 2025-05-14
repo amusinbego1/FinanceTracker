@@ -11,6 +11,7 @@
 class UserRepository: public BaseRepository{
 public:
     static const char * INSERT_USER_SQL;
+    static const char * FIND_USER_BY_USERNAME_AND_PASSWORD_SQL;
 
     static UserRepository& getInstance() {
         static UserRepository instance;
@@ -23,6 +24,7 @@ public:
     UserRepository& operator=(UserRepository&&) = delete;
 
     void saveUser(const User&);
+    std::optional<User> findUserByUsernameAndPassword(td::String username, td::String password);
 
 private:
     UserRepository() = default;
