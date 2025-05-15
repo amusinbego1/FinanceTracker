@@ -15,7 +15,7 @@ struct Transaction {
     td::Decimal2 amount = 0.0;
     td::String currency = "BAM";
     td::Date date;
-    std::optional<td::String> description;
+    td::String description;
 };
 
 #endif //TRANSACTION_H
