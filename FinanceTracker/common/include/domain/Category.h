@@ -20,6 +20,16 @@ inline td::String to_string(CategoryType type) {
     }
 }
 
+inline CategoryType from_string(const std::string& str) {
+    if (str == "INCOME") {
+        return CategoryType::INCOME;
+    } else if (str == "EXPENSE") {
+        return CategoryType::EXPENSE;
+    } else {
+        throw std::invalid_argument("Invalid CategoryType string: " + str);
+    }
+}
+
 struct Category {
     td::UINT4 id;
     td::String name;

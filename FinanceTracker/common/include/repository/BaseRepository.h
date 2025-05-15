@@ -49,6 +49,14 @@ public:
 protected:
     dp::IDatabasePtr _databasePtr;
 
+    inline void executeStatementAndThrowErrorIfExists(dp::IStatementPtr& statementPtr, dp::Transaction& transaction) {
+        if(!statementPtr -> execute()) {
+            transaction.rollBack();
+            td::String strErr;
+            statementPtr->getErrorStr(strErr);
+            throw std::exception(strErr.c_str());
+        }
+    }
 
 private:
 

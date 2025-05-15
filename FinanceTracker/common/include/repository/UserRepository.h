@@ -33,15 +33,7 @@ private:
 
     td::String encryptPassword(const td::String&);
     User findUserForDeletion(dp::Transaction&, const td::String& username, const td::String& password);
-    inline void executeStatementAndThrowErrorIfExists(dp::IStatementPtr& statementPtr, dp::Transaction& transaction) {
-        if(!statementPtr -> execute()) {
-            transaction.rollBack();
-            td::String strErr;
-            statementPtr->getErrorStr(strErr);
-            throw std::exception(strErr.c_str());
-        }
 
-    }
 
 };
 
