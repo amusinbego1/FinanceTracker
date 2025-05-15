@@ -10,9 +10,6 @@
 
 class UserRepository: public BaseRepository{
 public:
-    static const char * INSERT_USER_SQL;
-    static const char * FIND_USER_BY_USERNAME_AND_PASSWORD_SQL;
-
     static UserRepository& getInstance() {
         static UserRepository instance;
         return instance;
@@ -24,12 +21,27 @@ public:
     UserRepository& operator=(UserRepository&&) = delete;
 
     void saveUser(const User&);
-    std::optional<User> findUserByUsernameAndPassword(td::String username, td::String password);
+    std::optional<User> findUserByUsernameAndPassword(const td::String& username, const td::String& password);
+    void deleteUserByUsernameAndPassword(const td::String& username, const td::String& password);
 
 private:
+    static const char * INSERT_USER_SQL;
+    static const char * FIND_USER_BY_USERNAME_AND_PASSWORD_SQL;
+    static const char * DELETE_USER_BY_ID;
+
     UserRepository() = default;
 
     td::String encryptPassword(const td::String&);
+    User findUserForDeletion(dp::Transaction&, const td::String& username, const td::String& password);
+    inline void executeStatementAndThrowErrorIfExists(dp::IStatementPtr& statementPtr, dp::Transaction& transaction) {
+        if(!statementPtr -> execute()) {
+            transaction.rollBack();
+            td::String strErr;
+            statementPtr->getErrorStr(strErr);
+            throw std::exception(strErr.c_str());
+        }
+
+    }
 
 };
 
