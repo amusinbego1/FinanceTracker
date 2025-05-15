@@ -5,7 +5,7 @@
 #include "repository/CategoryRepository.h"
 
 const char* CategoryRepository::INSERT_CATEGORY_SQL = "INSERT INTO categories (name, type) VALUES (?, ?)";
-const char* CategoryRepository::FIND_CATEGORY_BY_NAME_AND_TYPE_SQL = "SELECT id FROM categories WHERE name = ? AND type = ?";
+const char* CategoryRepository::FIND_CATEGORY_BY_NAME_AND_TYPE_SQL = "SELECT id FROM categories WHERE UPPER(name) = UPPER(?) AND type = ?";
 const char* CategoryRepository::FIND_CATEGORIES_BY_CATEGORY_TYPE_SQL = "SELECT * FROM categories WHERE type = ?";
 
 void CategoryRepository::saveCategory(const Category& category){
