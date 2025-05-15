@@ -20,9 +20,11 @@ public:
     UserRepository(UserRepository&&) = delete;
     UserRepository& operator=(UserRepository&&) = delete;
 
+    // Interface
     void saveUser(const User&);
     std::optional<User> findUserByUsernameAndPassword(const td::String& username, const td::String& password);
     void deleteUserByUsernameAndPassword(const td::String& username, const td::String& password);
+    //
 
 private:
     static const char * INSERT_USER_SQL;
@@ -33,7 +35,6 @@ private:
 
     td::String encryptPassword(const td::String&);
     User findUserForDeletion(dp::Transaction&, const td::String& username, const td::String& password);
-
 
 };
 

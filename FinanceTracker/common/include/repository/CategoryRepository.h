@@ -20,15 +20,17 @@ public:
     CategoryRepository(CategoryRepository&&) = delete;
     CategoryRepository& operator=(CategoryRepository&&) = delete;
 
+    //Interface
     void saveCategory(const Category&);
     std::optional<Category> findCategoryByNameAndType(const td::String& name, const CategoryType& type);
     cnt::PushBackVector<Category> findAllExpenses();
     cnt::PushBackVector<Category> findAllIncomes();
+    //
 
 private:
 	static const char * INSERT_CATEGORY_SQL;
     static const char * FIND_CATEGORY_BY_NAME_AND_TYPE_SQL;
-    static const char * FIND_CATEGORIES_BY_CATEGORY_TYPE;
+    static const char * FIND_CATEGORIES_BY_CATEGORY_TYPE_SQL;
 
     CategoryRepository() = default;
 

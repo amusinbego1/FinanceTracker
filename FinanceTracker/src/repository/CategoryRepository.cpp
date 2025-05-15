@@ -6,7 +6,7 @@
 
 const char* CategoryRepository::INSERT_CATEGORY_SQL = "INSERT INTO categories (name, type) VALUES (?, ?)";
 const char* CategoryRepository::FIND_CATEGORY_BY_NAME_AND_TYPE_SQL = "SELECT id FROM categories WHERE name = ? AND type = ?";
-const char* CategoryRepository::FIND_CATEGORIES_BY_CATEGORY_TYPE = "SELECT * FROM categories WHERE type = ?";
+const char* CategoryRepository::FIND_CATEGORIES_BY_CATEGORY_TYPE_SQL = "SELECT * FROM categories WHERE type = ?";
 
 void CategoryRepository::saveCategory(const Category& category){
     dp::IStatementPtr saveStatPtr(_databasePtr->createStatement(INSERT_CATEGORY_SQL));
@@ -55,7 +55,7 @@ cnt::PushBackVector<Category> CategoryRepository::findAllCategories(const Catego
     Category category;
     category.type = type;
 
-    dp::IStatementPtr selectPtr(_databasePtr->createStatement(FIND_CATEGORIES_BY_CATEGORY_TYPE));
+    dp::IStatementPtr selectPtr(_databasePtr->createStatement(FIND_CATEGORIES_BY_CATEGORY_TYPE_SQL));
 
     td::Variant b_type(td::string8, td::nch, 10);
 
