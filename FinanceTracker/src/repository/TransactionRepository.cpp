@@ -55,7 +55,7 @@ void TransactionRepository::saveTransaction(const Transaction &transaction) {
     b_category_id = transaction.category.id;
     b_amount = transaction.amount;
     b_currency = transaction.currency;
-    b_date = transaction.date;
+    b_date = transaction.date.isNull() ? td::Date().now() : transaction.date;
     b_description = transaction.description;
 
     executeStatementAndThrowErrorIfExists(saveStatPtr, dbTransaction);

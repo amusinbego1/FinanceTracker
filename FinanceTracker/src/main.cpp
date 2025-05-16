@@ -18,7 +18,8 @@ int main() {
         cnt::PushBackVector<Transaction> transactionsAmer = transRepo.findTransactionsByUser(user);
 
         for(auto& tr: transactionsAmer)
-            std::cout << to_string(tr.category.type) << ": " << tr.amount + 1 << " (" << tr.currency << ")" << td::endl;
+            std::cout << to_string(tr.category.type) << ": " << tr.amount + 1 << " (" << tr.currency << ")"
+                      << tr.date.getDay() << td::endl;
 
 
     } catch (std::exception &e) {
