@@ -34,6 +34,7 @@ const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_SQL = "SELECT "
         "ON (cat.id = tr.category_id) "
         "WHERE user_id = ?";
 
+const char * TransactionRepository::DELETE_TRANSACTIONS_BY_ID_SQL = "DELETE FROM transactions WHERE id = ?";
 
 void TransactionRepository::saveTransaction(const Transaction &transaction) {
     dp::IStatementPtr saveStatPtr(_databasePtr->createStatement(INSERT_TRANSACTION_SQL));
@@ -97,3 +98,20 @@ cnt::PushBackVector<Transaction> TransactionRepository::findTransactionsByUser(c
 
     return transactions;
 }
+
+void TransactionRepository::deleteTransaction(const Transaction & transaction) {
+    dp::IStatementPtr deletePtr(_databasePtr->createStatement(DELETE_TRANSACTIONS_BY_ID_SQL));
+
+    td::Variant b_id(td::int4);
+
+    dp::Params params(deletePtr->allocParams());
+    params << b_id;
+
+    dp::Transaction dbTransaction(_databasePtr);
+    b_id = transaction.id;
+    executeStatementAndThrowErrorIfExists(deletePtr, dbTransaction);
+
+    dbTransaction.commit();
+
+}
+
