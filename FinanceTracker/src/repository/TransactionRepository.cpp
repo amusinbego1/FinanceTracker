@@ -4,25 +4,38 @@
 
 #include "repository/TransactionRepository.h"
 
-const char * TransactionRepository::INSERT_TRANSACTION_SQL = "INSERT INTO transactions ("
-                                                                "user_id,"
-                                                                "category_id,"
-                                                                "amount,"
-                                                                "currency,"
-                                                                "date,"
-                                                                "description"
-                                                            ") VALUES ("
-                                                                "?,"
-                                                                "?,"
-                                                                "?,"
-                                                                "?,"
-                                                                "?,"
-                                                                "?"
-                                                            ")";
+const char *TransactionRepository::INSERT_TRANSACTION_SQL = "INSERT INTO transactions ("
+        "user_id,"
+        "category_id,"
+        "amount,"
+        "currency,"
+        "date,"
+        "description"
+        ") VALUES ("
+        "?,"
+        "?,"
+        "?,"
+        "?,"
+        "?,"
+        "?"
+        ")";
+
+const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_SQL = "SELECT "
+        "tr.id, "
+        "cat.id cat_id, "
+        "cat.name cat_name, "
+        "cat.type cat_type, "
+        "tr.amount, "
+        "tr.currency, "
+        "tr.date, "
+        "tr.description "
+        "FROM transactions tr "
+        "JOIN categories cat "
+        "ON (cat.id = tr.category_id) "
+        "WHERE user_id = ?";
 
 
-
-void TransactionRepository::saveTransaction(const Transaction& transaction) {
+void TransactionRepository::saveTransaction(const Transaction &transaction) {
     dp::IStatementPtr saveStatPtr(_databasePtr->createStatement(INSERT_TRANSACTION_SQL));
 
     td::UINT4 b_user_id;
@@ -47,4 +60,40 @@ void TransactionRepository::saveTransaction(const Transaction& transaction) {
     executeStatementAndThrowErrorIfExists(saveStatPtr, dbTransaction);
 
     dbTransaction.commit();
+}
+
+
+cnt::PushBackVector<Transaction> TransactionRepository::findTransactionsByUser(const User &user) {
+    cnt::PushBackVector<Transaction> transactions;
+    Transaction transaction;
+    td::String tr_cat_type_str;
+    transaction.user = user;
+
+    dp::IDataSetPtr selectPtr(_databasePtr->createDataSet(FIND_TRANSACTIONS_BY_USER_SQL));
+
+    td::Variant b_user_id(td::int4);
+
+    dp::DSColumns columns(selectPtr->allocBindColumns(8));
+    columns << "id" << transaction.id
+            << "cat_id" << transaction.category.id
+            << "cat_name" << transaction.category.name
+            << "cat_type" << tr_cat_type_str
+            << "amount" << transaction.amount
+            << "currency" << transaction.currency
+            << "date" << transaction.date
+            << "description" << transaction.description;
+
+    dp::Params params(selectPtr->allocParams());
+    params << b_user_id;
+    b_user_id = user.id;
+
+    if (!selectPtr->execute())
+        throw std::exception("Something went wrong getting transactions by user...");
+
+    while (selectPtr->moveNext()) {
+        transaction.category.type = from_string(tr_cat_type_str.c_str());
+        transactions.push_back(transaction);
+    }
+
+    return transactions;
 }

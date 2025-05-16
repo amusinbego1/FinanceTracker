@@ -9,17 +9,17 @@
 int main() {
     try {
         auto & transRepo = TransactionRepository::getInstance();
-        auto & catRepo = CategoryRepository::getInstance();
+        auto & userRepo = UserRepository::getInstance();
 
-        std::cout << (transRepo.isConnectionOK() ? "Connected" : "Ne valja") << td::endl;
+        std::cout << (transRepo.isConnectionOK() ? "TransactionRepo Connected" : "Ne valja") << td::endl;
+        std::cout << (userRepo.isConnectionOK() ? "UserRepo Connected" : "Ne valja") << td::endl;
 
-        auto categ = catRepo.findCategoryByNameAndType("rent", CategoryType::EXPENSE).value_or(Category{0, "", CategoryType::INCOME});
+        User user = userRepo.findUserByUsernameAndPassword("amusinbego1", "amer1234").value();
+        cnt::PushBackVector<Transaction> transactionsAmer = transRepo.findTransactionsByUser(user);
 
-        td::Date date;
-        date.now();
-        Transaction tr{0, User{2, "", ""}, categ, 500, "BAM", date, td::String()};
+        for(auto& tr: transactionsAmer)
+            std::cout << to_string(tr.category.type) << ": " << tr.amount + 1 << " (" << tr.currency << ")" << td::endl;
 
-        transRepo.saveTransaction(tr);
 
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;

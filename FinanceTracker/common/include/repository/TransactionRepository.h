@@ -21,11 +21,12 @@ public:
 
     //Interface
     void saveTransaction(const Transaction&);
+    cnt::PushBackVector<Transaction> findTransactionsByUser(const User&);
     //
 
 private:
     static const char * INSERT_TRANSACTION_SQL;
-    static const char * FIND_CATEGORY_BY_NAME_AND_TYPE_SQL;
+    static const char * FIND_TRANSACTIONS_BY_USER_SQL;
     static const char * FIND_CATEGORIES_BY_CATEGORY_TYPE_S;
 
     TransactionRepository() = default;
