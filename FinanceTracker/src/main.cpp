@@ -19,7 +19,7 @@ int main() {
 
        TransactionService& service = TransactionService::getInstance(user);
 
-        auto transactions = service.getAllTransactions(TransactionSortField::CategoryNameDesc);
+        auto transactions = service.getAllTransactions();
         std::cout << td::endl;
         for (auto &tr: transactions)
             std::cout << to_string(tr.category.type)
@@ -37,6 +37,16 @@ int main() {
         for (const auto& [category, amount] : expenses) {
             std::cout << category << ": " << amount << " BAM" << td::endl;
         }
+
+        std::cout << "---------------------------------------" << td::endl;
+
+        auto monthlyBreakdown = service.getMonthlyBreakdown(2025);
+        for (const auto& [month, summary] : monthlyBreakdown) {
+            std::cout << month << " -> Income: " << summary.getIncome()
+                      << ", Expense: " << summary.getExpense()
+                      << ", Balance: " << summary.getBalance() << " BAM" << td::endl;
+        }
+
 
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;

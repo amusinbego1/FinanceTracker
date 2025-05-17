@@ -74,3 +74,20 @@ std::map<td::String, td::Decimal2> TransactionService::getTotalExpensesByCategor
 
     return expensesByCategory;
 }
+
+std::map<td::INT4, TransactionService::Summary> TransactionService::getMonthlyBreakdown(td::INT4 year) {
+    std::map<td::INT4, Summary> monthlyData;
+    auto transactions = cache_.findAllTransactions(user_);
+
+    for (const auto& transaction : transactions) {
+        if (transaction.date.getYear() == year) {
+            if (transaction.category.type == CategoryType::INCOME) {
+                monthlyData[transaction.date.getMonth()].addIncome(transaction.amount);
+            } else if (transaction.category.type == CategoryType::EXPENSE) {
+                monthlyData[transaction.date.getMonth()].addExpense(transaction.amount);
+            }
+        }
+    }
+
+    return monthlyData;
+}
