@@ -24,12 +24,12 @@ public:
 
     // ----------Interface-----------
     void addNewTransaction(const Transaction& transaction) {
-        repository_.saveTransaction(transaction);
+        TransactionRepository::getInstance().saveTransaction(transaction);
         cache_.invalidate();
     }
 
     void deleteTransaction(const Transaction& transaction) {
-        repository_.deleteTransaction(transaction);
+        TransactionRepository::getInstance().deleteTransaction(transaction);
         cache_.invalidate();
     }
 
@@ -47,13 +47,10 @@ public:
 
 private:
     User user_;
-    TransactionRepository& repository_;
     TransactionCache cache_;
 
     explicit TransactionService(const User& user)
-        : user_(user),
-          repository_(TransactionRepository::getInstance()),
-          cache_(repository_) {}
+        : user_(user) {}
 };
 
 

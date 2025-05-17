@@ -9,12 +9,12 @@
 
 class TransactionCache {
 public:
-    explicit TransactionCache(TransactionRepository& repo)
-        : repository_(repo), cacheValid_(false) {}
+    explicit TransactionCache()
+        :cacheValid_(false) {}
 
     const cnt::PushBackVector<Transaction>& findAllTransactions(const User& user) {
         if (!cacheValid_) {
-            cache_ = repository_.findTransactionsByUser(user);
+            cache_ = TransactionRepository::getInstance().findTransactionsByUser(user);
             cacheValid_ = true;
         }
         return cache_;
@@ -25,7 +25,6 @@ public:
     }
 
 private:
-    TransactionRepository& repository_;
     cnt::PushBackVector<Transaction> cache_;
     bool cacheValid_;
 };
