@@ -18,10 +18,8 @@ int main() {
         User user = userRepo.findUserByUsernameAndPassword("amusinbego1", "amer1234").value();
 
        TransactionService& service = TransactionService::getInstance(user);
-        // auto &service = TransactionRepository::getInstance();
 
-        auto transactions = service.findAllTransactions();
-        // auto transactions = service.findTransactionsByUser(user);
+        auto transactions = service.getAllTransactions(TransactionSortField::CategoryNameDesc);
         std::cout << td::endl;
         for (auto &tr: transactions)
             std::cout << to_string(tr.category.type)
@@ -31,18 +29,7 @@ int main() {
                     << "UserId = " << tr.user.id << " "
                     << tr.date << td::endl;
 
-
-        transactions = service.findAllTransactions(TransactionSortField::AmountAsc);
-        std::cout << td::endl;
-        for (auto &tr: transactions)
-            std::cout << to_string(tr.category.type)
-                    << " (" << tr.category.name << ") "
-                    << ": " << tr.amount << " (" << tr.currency << ") "
-                    << "User = " << tr.user.username << " "
-                    << "UserId = " << tr.user.id << " "
-                    << tr.date << td::endl;
-
-
+        std::cout << td::endl << service.getBalance() << td::endl;
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;
     }

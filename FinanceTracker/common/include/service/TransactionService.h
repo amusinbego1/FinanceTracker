@@ -27,13 +27,12 @@ public:
         TransactionRepository::getInstance().saveTransaction(transaction);
         cache_.invalidate();
     }
-
     void deleteTransaction(const Transaction& transaction) {
         TransactionRepository::getInstance().deleteTransaction(transaction);
         cache_.invalidate();
     }
-
-    std::vector<Transaction> findAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
+    std::vector<Transaction> getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
+    td::Decimal2 getBalance();
     // -------------------------------
 
     const User& getUser() const {

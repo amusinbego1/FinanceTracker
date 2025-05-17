@@ -4,7 +4,7 @@
 
 #include "service/TransactionService.h"
 
-std::vector<Transaction> TransactionService::findAllTransactions(TransactionSortField sortBy) {
+std::vector<Transaction> TransactionService::getAllTransactions(TransactionSortField sortBy) {
     auto transactions = cache_.findAllTransactions(user_);
 
     std::sort(transactions.begin(), transactions.end(), [&](const Transaction& a, const Transaction& b) {
@@ -31,4 +31,12 @@ std::vector<Transaction> TransactionService::findAllTransactions(TransactionSort
 });
 
     return transactions;
+}
+
+td::Decimal2 TransactionService::getBalance() {
+    const auto& transactions = cache_.findAllTransactions(user_);
+    td::Decimal2 balance = 0.0;
+    for(const auto& transaction: transactions)
+        balance += (transaction.category.type == CategoryType::INCOME ? transaction.amount : transaction.amount*-1);
+    return balance;
 }
