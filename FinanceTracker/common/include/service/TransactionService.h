@@ -33,7 +33,7 @@ public:
         cache_.invalidate();
     }
 
-    cnt::PushBackVector<Transaction> findAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
+    std::vector<Transaction> findAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     // -------------------------------
 
     const User& getUser() const {

@@ -20,7 +20,7 @@ int main() {
        TransactionService& service = TransactionService::getInstance(user);
         // auto &service = TransactionRepository::getInstance();
 
-        auto transactions = service.findAllTransactions(TransactionSortField::DateAsc);
+        auto transactions = service.findAllTransactions();
         // auto transactions = service.findTransactionsByUser(user);
         std::cout << td::endl;
         for (auto &tr: transactions)
@@ -31,7 +31,17 @@ int main() {
                     << "UserId = " << tr.user.id << " "
                     << tr.date << td::endl;
 
-        // service.findAllTransactions(TransactionSortField::AmountDesc);
+
+        transactions = service.findAllTransactions(TransactionSortField::AmountAsc);
+        std::cout << td::endl;
+        for (auto &tr: transactions)
+            std::cout << to_string(tr.category.type)
+                    << " (" << tr.category.name << ") "
+                    << ": " << tr.amount << " (" << tr.currency << ") "
+                    << "User = " << tr.user.username << " "
+                    << "UserId = " << tr.user.id << " "
+                    << tr.date << td::endl;
+
 
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;

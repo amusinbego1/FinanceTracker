@@ -21,7 +21,7 @@ public:
 
     //Interface
     void saveTransaction(const Transaction&);
-    cnt::PushBackVector<Transaction> findTransactionsByUser(const User&);
+    std::vector<Transaction> findTransactionsByUser(const User&);
     void deleteTransaction(const Transaction&);
     //
 

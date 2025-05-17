@@ -66,8 +66,8 @@ void TransactionRepository::saveTransaction(const Transaction &transaction) {
 }
 
 
-cnt::PushBackVector<Transaction> TransactionRepository::findTransactionsByUser(const User &user) {
-    cnt::PushBackVector<Transaction> transactions;
+std::vector<Transaction> TransactionRepository::findTransactionsByUser(const User &user) {
+    std::vector<Transaction> transactions;
     Transaction transaction;
     td::String tr_cat_type_str;
     transaction.user = user;
