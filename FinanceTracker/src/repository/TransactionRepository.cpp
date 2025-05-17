@@ -44,6 +44,7 @@ void TransactionRepository::saveTransaction(const Transaction &transaction) {
     td::Decimal2 b_amount;
     td::Variant b_currency(td::string8, td::nch, 3);
     td::Date b_date;
+    b_date.now();
     td::Variant b_description(td::string8, td::nch, 100);
 
 
@@ -55,7 +56,8 @@ void TransactionRepository::saveTransaction(const Transaction &transaction) {
     b_category_id = transaction.category.id;
     b_amount = transaction.amount;
     b_currency = transaction.currency;
-    b_date = transaction.date.isNull() ? td::Date().now() : transaction.date;
+    if (!transaction.date.isNull())
+        b_date = transaction.date;
     b_description = transaction.description;
 
     executeStatementAndThrowErrorIfExists(saveStatPtr, dbTransaction);
