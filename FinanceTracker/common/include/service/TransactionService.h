@@ -5,6 +5,8 @@
 #ifndef TRANSACTIONSERVICE_H
 #define TRANSACTIONSERVICE_H
 
+#include <map>
+
 #include "domain/Transaction.h"
 #include "repository/TransactionRepository.h"
 #include "domain/TransactionSortField.h"
@@ -35,7 +37,7 @@ public:
     td::Decimal2 getBalance();
     td::Decimal2 getTotalIncome();
     td::Decimal2 getTotalExpense();
-    std::unordered_map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
+    std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     // -------------------------------
 
     const User& getUser() const {

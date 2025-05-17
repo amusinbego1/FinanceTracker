@@ -4,6 +4,8 @@
 
 #include "service/TransactionService.h"
 
+#include <map>
+
 std::vector<Transaction> TransactionService::getAllTransactions(TransactionSortField sortBy) {
     auto transactions = cache_.findAllTransactions(user_);
 
@@ -57,13 +59,15 @@ td::Decimal2 TransactionService::getTotalExpense() {
     return totalExpense;
 }
 
-std::unordered_map<td::String, td::Decimal2> TransactionService::getTotalExpensesByCategoryName() {
-    std::unordered_map<td::String, td::Decimal2> expensesByCategory;
+std::map<td::String, td::Decimal2> TransactionService::getTotalExpensesByCategoryName() {
+    std::map<td::String, td::Decimal2> expensesByCategory;
     const auto& transactions = cache_.findAllTransactions(user_);
 
     for (const auto& transaction : transactions) {
         if (transaction.category.type == CategoryType::EXPENSE) {
             const td::String& categoryName = transaction.category.name;
+            if (expensesByCategory.count(categoryName) == 0)
+                expensesByCategory[categoryName] = 0.0;
             expensesByCategory[categoryName] += transaction.amount;
         }
     }

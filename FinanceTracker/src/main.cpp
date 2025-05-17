@@ -32,6 +32,12 @@ int main() {
         std::cout << td::endl << service.getBalance() << td::endl;
         std::cout << td::endl << service.getTotalIncome() << td::endl;
         std::cout << td::endl << service.getTotalExpense() << td::endl;
+
+        auto expenses = service.getTotalExpensesByCategoryName();
+        for (const auto& [category, amount] : expenses) {
+            std::cout << category << ": " << amount << " BAM" << td::endl;
+        }
+
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;
     }
