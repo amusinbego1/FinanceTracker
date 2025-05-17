@@ -30,6 +30,8 @@ int main() {
                     << tr.date << td::endl;
 
         std::cout << td::endl << service.getBalance() << td::endl;
+        std::cout << td::endl << service.getTotalIncome() << td::endl;
+        std::cout << td::endl << service.getTotalExpense() << td::endl;
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;
     }

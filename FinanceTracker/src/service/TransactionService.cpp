@@ -40,3 +40,19 @@ td::Decimal2 TransactionService::getBalance() {
         balance += (transaction.category.type == CategoryType::INCOME ? transaction.amount : transaction.amount*-1);
     return balance;
 }
+
+td::Decimal2 TransactionService::getTotalIncome() {
+    const auto& transactions = cache_.findAllTransactions(user_);
+    td::Decimal2 totalIncome = 0.0;
+    for(const auto& transaction: transactions)
+        totalIncome += (transaction.category.type == CategoryType::INCOME ? transaction.amount : 0.0);
+    return totalIncome;
+}
+
+td::Decimal2 TransactionService::getTotalExpense() {
+    const auto& transactions = cache_.findAllTransactions(user_);
+    td::Decimal2 totalExpense = 0.0;
+    for(const auto& transaction: transactions)
+        totalExpense += (transaction.category.type == CategoryType::EXPENSE ? transaction.amount : 0.0);
+    return totalExpense;
+}

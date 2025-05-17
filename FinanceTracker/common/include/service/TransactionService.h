@@ -33,6 +33,8 @@ public:
     }
     std::vector<Transaction> getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     td::Decimal2 getBalance();
+    td::Decimal2 getTotalIncome();
+    td::Decimal2 getTotalExpense();
     // -------------------------------
 
     const User& getUser() const {
