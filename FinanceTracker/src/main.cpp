@@ -46,6 +46,16 @@ int main() {
                       << ", Expense: " << summary.getExpense()
                       << ", Balance: " << summary.getBalance() << " BAM" << td::endl;
         }
+        std::cout << "---------------------------------------" << td::endl;
+
+        auto breakdown = service.getDailyBreakdown(2025, 2);
+
+        for (const auto& [date, summary] : breakdown) {
+            std::cout << date << ": "
+                      << "Income=" << summary.getIncome()
+                      << ", Expense=" << summary.getExpense()
+                      << ", Balance=" << summary.getBalance() << std::endl;
+        }
 
 
     } catch (std::exception &e) {

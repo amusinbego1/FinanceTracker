@@ -40,7 +40,8 @@ public:
     td::Decimal2 getTotalIncome();
     td::Decimal2 getTotalExpense();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
-    std::map<td::INT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
+    std::map<td::UINT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
+    std::map<td::UINT4, ServiceUtils::Summary> getDailyBreakdown(td::INT4 year, td::UINT4 month);
     // -------------------------------
 
     const User& getUser() const {
