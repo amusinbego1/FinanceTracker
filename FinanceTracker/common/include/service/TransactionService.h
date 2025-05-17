@@ -11,6 +11,7 @@
 #include "repository/TransactionRepository.h"
 #include "domain/TransactionSortField.h"
 #include "repository/cache/TransactionCache.h"
+#include "utility/ServiceUtils.h"
 
 class TransactionService {
 public:
@@ -39,28 +40,7 @@ public:
     td::Decimal2 getTotalIncome();
     td::Decimal2 getTotalExpense();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
-
-    class Summary{
-        td::Decimal2 income_, expense_;
-
-    public:
-        Summary(): income_(0.0), expense_(0.0){}
-
-        Summary& addIncome(td::Decimal2 income){
-            income_ += income;
-            return *this;
-        }
-        Summary& addExpense(td::Decimal2 expense){
-            expense_ += expense;
-            return *this;
-        }
-
-        td::Decimal2 getIncome() const {return income_;}
-        td::Decimal2 getExpense() const {return expense_;}
-        td::Decimal2 getBalance() const {return income_ - expense_;}
-
-    };
-    std::map<td::INT4, Summary> getMonthlyBreakdown(td::INT4 year);
+    std::map<td::INT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
     // -------------------------------
 
     const User& getUser() const {
