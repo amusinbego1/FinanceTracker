@@ -35,6 +35,7 @@ public:
     td::Decimal2 getBalance();
     td::Decimal2 getTotalIncome();
     td::Decimal2 getTotalExpense();
+    std::unordered_map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     // -------------------------------
 
     const User& getUser() const {

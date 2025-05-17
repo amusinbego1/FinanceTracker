@@ -56,3 +56,17 @@ td::Decimal2 TransactionService::getTotalExpense() {
         totalExpense += (transaction.category.type == CategoryType::EXPENSE ? transaction.amount : 0.0);
     return totalExpense;
 }
+
+std::unordered_map<td::String, td::Decimal2> TransactionService::getTotalExpensesByCategoryName() {
+    std::unordered_map<td::String, td::Decimal2> expensesByCategory;
+    const auto& transactions = cache_.findAllTransactions(user_);
+
+    for (const auto& transaction : transactions) {
+        if (transaction.category.type == CategoryType::EXPENSE) {
+            const td::String& categoryName = transaction.category.name;
+            expensesByCategory[categoryName] += transaction.amount;
+        }
+    }
+
+    return expensesByCategory;
+}
