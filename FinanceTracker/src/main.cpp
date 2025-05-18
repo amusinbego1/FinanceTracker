@@ -80,6 +80,8 @@ int main() {
                       << ", Balance=" << summary.getBalance() << std::endl;
         }
 
+        std::cout << service.writeToXml() << td::endl;
+
 
     } catch (std::exception &e) {
         std::cout << e.what() << td::endl;
