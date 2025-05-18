@@ -29,9 +29,10 @@ int main() {
                     << "UserId = " << tr.user.id << " "
                     << tr.date << td::endl;
 
-        std::cout << td::endl << service.getBalance() << td::endl;
-        std::cout << td::endl << service.getTotalIncome() << td::endl;
-        std::cout << td::endl << service.getTotalExpense() << td::endl;
+        auto summary = service.getSummary();
+        std::cout << td::endl << summary.getBalance() << td::endl;
+        std::cout << td::endl << summary.getIncome() << td::endl;
+        std::cout << td::endl << summary.getExpense() << td::endl;
 
         auto expenses = service.getTotalExpensesByCategoryName();
         for (const auto& [category, amount] : expenses) {

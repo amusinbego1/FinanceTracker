@@ -36,9 +36,7 @@ public:
         cache_.invalidate();
     }
     std::vector<Transaction> getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
-    td::Decimal2 getBalance();
-    td::Decimal2 getTotalIncome();
-    td::Decimal2 getTotalExpense();
+    ServiceUtils::Summary getSummary();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     std::map<td::UINT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
     std::map<td::UINT4, ServiceUtils::Summary> getDailyBreakdown(td::INT4 year, td::UINT4 month);
