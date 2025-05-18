@@ -35,7 +35,7 @@ public:
         TransactionRepository::getInstance().deleteTransaction(transaction);
         cache_.invalidate();
     }
-    std::vector<Transaction> getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
+    const std::vector<Transaction>& getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     ServiceUtils::Summary getSummary();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     std::map<td::UINT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);

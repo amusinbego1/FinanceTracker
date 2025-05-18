@@ -14,6 +14,7 @@ enum class TransactionSortField {
     CategoryTypeDesc,
     AmountDesc,
     AmountAsc,
+    NoSort
     // Add more as needed
 };
 
