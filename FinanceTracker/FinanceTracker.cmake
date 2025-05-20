@@ -27,10 +27,26 @@ target_link_libraries(${FINANCE_TRACKER_NAME}
         debug ${NATGUI_LIB_DEBUG} optimized ${NATGUI_LIB_RELEASE}
 )
 
-setTargetPropertiesForGUIApp(${FINANCE_TRACKER_NAME} ${FINANCE_TRACKER_PLIST})
+#setTargetPropertiesForGUIApp(${FINANCE_TRACKER_NAME} ${FINANCE_TRACKER_PLIST})
 #
 setIDEPropertiesForGUIExecutable(${FINANCE_TRACKER_NAME} ${CMAKE_CURRENT_LIST_DIR})
 #
 setPlatformDLLPath(${FINANCE_TRACKER_NAME})
 
 addMUCompileDefinitions(${FINANCE_TRACKER_NAME})
+
+
+# Define the source directory (where files to copy are located)
+#set(OTHER_BIN_DIR "C:/Users/Amer/other_bin")
+
+# Recursively find all files (of any type)
+file(GLOB_RECURSE ALL_OTHER_BIN_FILES "${MY_BIN}/*")
+
+# Copy all files to the build output folder after build
+foreach(FILE ${ALL_OTHER_BIN_FILES})
+    add_custom_command(TARGET ${FINANCE_TRACKER_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${FILE}"
+            $<TARGET_FILE_DIR:${FINANCE_TRACKER_NAME}>
+    )
+endforeach()
