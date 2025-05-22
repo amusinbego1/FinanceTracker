@@ -1,7 +1,10 @@
 <?xml version='1.0'?>
 <DevRes>
 	<Images>
+		<Res id="languageSwitch" path="Work/Common/Icons/FinanceTracker/languageSwitch.png"/>-->
 	</Images>
 	<Symbols>
+<!--		<Res id="LanguageButton" path="Work/Common/Symbols/FinanceTracker/languages.xml"/>-->
 	</Symbols>
 </DevRes>
+

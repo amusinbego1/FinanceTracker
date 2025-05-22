@@ -7,13 +7,14 @@
 
 #include <gui/Application.h>
 #include "gui/mainWindow/MainWindow.h"
+#include "gui/loginWindow/LoginWindow.h"
 
 class FTApplication: public gui::Application {
 protected:
 
     gui::Window* createInitialWindow() override
     {
-        return new MainWindow();
+        return new LoginWindow();
     }
 
 public:
