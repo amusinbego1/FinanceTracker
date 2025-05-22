@@ -14,8 +14,8 @@
 class BaseRepository {
 public:
     BaseRepository(){
-        mu::getHomePath(_homePath);
-        _dbFullPath = _homePath / "other_bin/TestData/FinanceTracker/FinanceTracker.db";
+        // mu::getHomePath(_homePath);
+        _dbFullPath = DB_PATH;
         _databasePtr = dp::create(dp::IDatabase::ConnType::CT_SQLITE, dp::IDatabase::ServerType::SER_SQLITE3);
 
         connect();

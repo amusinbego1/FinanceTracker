@@ -11,7 +11,7 @@ class MainWindow : public gui::Window
 {
 public:
     MainWindow()
-    : gui::Window(gui::Geometry(50, 50, 1200, 480))
+    : gui::Window(gui::Geometry(50, 250, 1200, 800))
     {
         setTitle("First App");
         //        composeContent();

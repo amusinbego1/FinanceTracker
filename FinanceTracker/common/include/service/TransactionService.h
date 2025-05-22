@@ -39,7 +39,7 @@ public:
     const std::vector<Transaction>& getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     td::String writeTransactionsToXml() {
         xml_writer_.write(getAllTransactions(TransactionSortField::NoSort));
-        return BUILD_PATH;
+        return XML_PATH;
     }
     ServiceUtils::Summary getSummary();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
@@ -62,7 +62,7 @@ private:
     TransactionXmlWriter xml_writer_;
 
     explicit TransactionService(const User& user)
-        : user_(user), xml_writer_(BUILD_PATH) {}
+        : user_(user), xml_writer_(XML_PATH) {}
 
 };
 
