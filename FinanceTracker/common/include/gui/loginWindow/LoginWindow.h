@@ -9,10 +9,12 @@
 #include "LoginToolBar.h"
 #include "gui/utils/UIElementId.h"
 #include "gui/utils/languages/MultilingualWindow.h"
+#include "LoginView.h"
 
 class LoginWindow : public gui::Window, private MultilingualWindow {
 protected:
     LoginToolBar _toolBar;
+    LoginView _loginView;
 
     bool onActionItem(gui::ActionItemDescriptor &aiDesc) override ;
 

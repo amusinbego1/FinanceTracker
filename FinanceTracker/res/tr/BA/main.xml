@@ -2,7 +2,9 @@
 <DevRes>
 	<Translations>
 		<Res id="open" tr="Otvori"/>
-		<Res id="login" tr="Prijava"/>
+		<Res id="signIn" tr="Prijava"/>
+		<Res id="username" tr="Korisničko ime"/>
+		<Res id="password" tr="Lozinka"/>
 		<Res id="save" tr="Snimi"/>
 		<Res id="languageSwitch" tr="Promijeni jezik"/>
 		<Res id="languageSwitched" tr="Jezik promijenjen"/>

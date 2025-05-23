@@ -4,6 +4,8 @@
 
 #include "gui/utils/languages/MultilingualWindow.h"
 
+#include <gui/BaseView.h>
+
 Language MultilingualWindow::_currentLanguage = Language::EN;
 
 bool MultilingualWindow::changeLanguage(){

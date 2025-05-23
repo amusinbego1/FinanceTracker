@@ -2,7 +2,9 @@
 <DevRes>
 	<Translations>
 		<Res id="open" tr="Open"/>
-		<Res id="login" tr="Sign In"/>
+		<Res id="signIn" tr="Sign In"/>
+		<Res id="username" tr="Username"/>
+		<Res id="password" tr="Password"/>
 		<Res id="save" tr="Save"/>
 		<Res id="languageSwitch" tr="Change Language"/>
 		<Res id="languageSwitched" tr="Language Changed"/>

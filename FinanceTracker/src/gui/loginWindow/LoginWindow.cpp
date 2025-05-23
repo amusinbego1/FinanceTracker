@@ -17,10 +17,11 @@ bool LoginWindow::onActionItem(gui::ActionItemDescriptor &aiDesc) {
 }
 
 LoginWindow::LoginWindow()
-        : gui::Window(gui::Geometry(650, 400, 600, 300)),
+        : gui::Window(gui::Geometry(650, 400, 500, 400)),
         MultilingualWindow(this){
     td::String login = "Finance Tracker - ";
-    login.append(tr("login"));
+    login.append(tr("signIn"));
     setTitle(login);
     setToolBar(_toolBar);
+    setCentralView(&_loginView);
 }
