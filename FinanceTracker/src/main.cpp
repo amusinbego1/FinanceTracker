@@ -14,6 +14,6 @@ int main(int argc, const char * argv[])
     FreeConsole();
 
     FTApplication app(argc, argv);
-    app.init("BA");
+    app.init(toString(MultilingualWindow::_currentLanguage));
     return app.run();
 }

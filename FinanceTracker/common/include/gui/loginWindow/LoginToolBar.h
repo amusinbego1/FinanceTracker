@@ -6,21 +6,14 @@
 #define LOGINTOOLBAR_H
 
 #include <gui/ToolBar.h>
-#include <gui/Image.h>
+#include "gui/utils/languages/MultilingualToolBar.h"
 
-class LoginToolBar : public gui::ToolBar
-{
-protected:
-
-    gui::Image _icon;
+class LoginToolBar : public gui::ToolBar, private MultilingualToolBar {
 public:
     LoginToolBar()
-    : gui::ToolBar("loginTB", 1),
-    _icon(":languageSwitch")
-    {
-        addItem(td::String(), &_icon, tr("languageSwitch"), 10, 0, 0, 10);
+        : gui::ToolBar("loginTB", 1),
+          MultilingualToolBar(this, &gui::ToolBar::addItem) {
     }
-
 };
 
 #endif //LOGINTOOLBAR_H
