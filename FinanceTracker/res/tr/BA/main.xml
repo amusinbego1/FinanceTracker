@@ -4,13 +4,18 @@
 		<Res id="open" tr="Otvori"/>
 		<Res id="signIn" tr="Prijava"/>
 		<Res id="register" tr="Registracija"/>
+		<Res id="cancel" tr="Otkaži"/>
 		<Res id="invalidUserWarning" tr="Neispravno korisničko ime ili lozinka. Da li ste mislili na registraciju?"/>
 		<Res id="username" tr="Korisničko ime"/>
+		<Res id="tooShortUsername" tr="Korisničko ime mora biti duže od 4 znaka"/>
 		<Res id="password" tr="Lozinka"/>
+		<Res id="confirmPassword" tr="Potvrdi lozinku"/>
+		<Res id="invalidPassword" tr="Lozinke se ne poklapaju"/>
 		<Res id="save" tr="Snimi"/>
 		<Res id="languageSwitch" tr="Promijeni jezik"/>
 		<Res id="languageSwitched" tr="Jezik promijenjen"/>
 		<Res id="success" tr="Uspješno"/>
 		<Res id="welcome" tr="Dobrodošao/la "/>
+		<Res id="welcomeBack" tr="Dobrodošao/la ponovo "/>
 	</Translations>
 </DevRes>

@@ -9,7 +9,6 @@
 #include <gui/View.h>
 #include <gui/Label.h>
 #include <gui/LineEdit.h>
-#include <gui/TextEdit.h>
 #include <gui/Button.h>
 #include <gui/HorizontalLayout.h>
 #include <gui/VerticalLayout.h>
@@ -24,9 +23,9 @@ class LoginView : public gui::View
     void arrangeButtonLayout();
     void arrangeVerticalInputLayout();
     void arrangeMainHorizontalLayout();
-    bool hangleClickOnSignInButton();
-    bool showInfoForValidCredentials(const User &loggedInUser);
-    bool showWarningForInvalidCredentials();
+    bool handleClickOnSignInButton();
+    void showInfoForValidCredentials(const User &loggedInUser);
+    void showWarningForInvalidCredentials();
 protected:
     gui::Label _lblUsername;
     gui::LineEdit _lnUsername;
@@ -41,13 +40,7 @@ protected:
 public:
     LoginView();
 
-
-    bool onClick(gui::Button* pBtn) override
-    {
-        if (pBtn == &_btnSignIn)
-            return hangleClickOnSignInButton();
-        return false;
-    }
+    bool onClick(gui::Button* pBtn) override;
 
 
 };

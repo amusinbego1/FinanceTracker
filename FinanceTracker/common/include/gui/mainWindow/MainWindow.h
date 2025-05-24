@@ -6,6 +6,7 @@
 #define MAINWINDOW_H
 
 #include <gui/Window.h>
+#include <gui/loginWindow/LoginWindow.h>
 
 class MainWindow : public gui::Window
 {

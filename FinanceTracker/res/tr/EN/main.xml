@@ -4,13 +4,18 @@
 		<Res id="open" tr="Open"/>
 		<Res id="signIn" tr="Sign In"/>
 		<Res id="register" tr="Register"/>
+		<Res id="cancel" tr="Cancel"/>
 		<Res id="invalidUserWarning" tr="Incorrect username or password. Did you mean to register?"/>
 		<Res id="username" tr="Username"/>
+		<Res id="tooShortUsername" tr="Username must be longer than 4 characters"/>
 		<Res id="password" tr="Password"/>
+		<Res id="confirmPassword" tr="Confirm Password"/>
+		<Res id="invalidPassword" tr="Passwords do not match"/>
 		<Res id="save" tr="Save"/>
 		<Res id="languageSwitch" tr="Change Language"/>
 		<Res id="languageSwitched" tr="Language Changed"/>
 		<Res id="success" tr="Success"/>
 		<Res id="welcome" tr="Welcome "/>
+		<Res id="welcomeBack" tr="Welcome back "/>
 	</Translations>
 </DevRes>

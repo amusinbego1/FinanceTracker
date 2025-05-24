@@ -20,8 +20,7 @@ protected:
 public:
     LoginWindow();
 
-    ~LoginWindow() {
-    }
+    virtual ~LoginWindow() = default;
 };
 
 

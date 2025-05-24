@@ -22,6 +22,8 @@ protected:
 
 public:
     static Language _currentLanguage;
+
+    virtual ~MultilingualWindow() = default;
 };
 
 #endif //MULTILINGUALWINDOW_H

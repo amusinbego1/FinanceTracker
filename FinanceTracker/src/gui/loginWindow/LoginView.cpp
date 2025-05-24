@@ -2,7 +2,10 @@
 // Created by Amer on 23. 5. 2025..
 //
 #include "gui/loginWindow/LoginView.h"
-#include "gui/utils/ComponentStyle.h"
+
+#include <gui/registerWindow/RegisterWindow.h>
+
+#include "gui/utils/ComponentUtils.h"
 
 LoginView::LoginView()
     : _lblUsername(tr("username"))
@@ -18,9 +21,9 @@ LoginView::LoginView()
 }
 
 void LoginView::setStyles() {
-    ComponentStyle::setDefaultButtonStyle(_btnSignIn);
-    ComponentStyle::setDefaultButtonStyle(_btnRegister);
-    ComponentStyle::setLabelWarningStyle(_lblInvalidUserWarning);
+    ComponentUtils::setDefaultButtonStyle(_btnSignIn);
+    ComponentUtils::setDefaultButtonStyle(_btnRegister);
+    ComponentUtils::setLabelWarningStyle(_lblInvalidUserWarning);
 
 }
 
@@ -31,15 +34,21 @@ void LoginView::arrangeButtonLayout() {
 
 void LoginView::arrangeVerticalInputLayout() {
     _vLayout.appendSpacer(4);
+
     _vLayout.append(_lblUsername, td::HAlignment::Left);
     _vLayout.append(_lnUsername);
+
     _vLayout.appendSpacer(1);
+
     _vLayout.append(_lblPassword, td::HAlignment::Left);
     _vLayout.append(_lnPassword);
+
     _vLayout.appendSpacer(1);
     _vLayout.append(_lblInvalidUserWarning, td::HAlignment::Center);
     _vLayout.appendSpacer(1);
-    _vLayout.append(_buttonHLayout);
+
+    _vLayout.appendLayout(_buttonHLayout);
+
     _vLayout.appendSpacer(4);
 }
 
@@ -58,7 +67,7 @@ void LoginView::arrangeElements() {
 }
 
 
-bool LoginView::hangleClickOnSignInButton() {
+bool LoginView::handleClickOnSignInButton() {
     td::Variant username, password;
     _lnUsername.getValue(username);
     _lnPassword.getValue(password);
@@ -66,21 +75,34 @@ bool LoginView::hangleClickOnSignInButton() {
     UserRepository& userRepo = UserRepository::getInstance();
     std::optional<User> user_optional = userRepo.findUserByUsernameAndPassword(username.strVal(), password.strVal());
 
-    if(user_optional.has_value())
-        return showInfoForValidCredentials(user_optional.value());
-    else
-        return showWarningForInvalidCredentials();
+    if(user_optional.has_value()) {
+        showInfoForValidCredentials(user_optional.value());
+        //TODO: open main window tih the signed in user
+        return true;
+    }
+    showWarningForInvalidCredentials();
+    return false;
 }
 
-bool LoginView::showInfoForValidCredentials(const User &loggedInUser) {
+void LoginView::showInfoForValidCredentials(const User &loggedInUser) {
     // TODO: resize this info window
-    showInfo(tr("success"), (tr("welcome") + loggedInUser.username).strVal());
-    return true;
+    showInfo(tr("success"), (tr("welcomeBack") + loggedInUser.username).strVal());
 }
 
-bool LoginView::showWarningForInvalidCredentials() {
+void LoginView::showWarningForInvalidCredentials() {
     _lblInvalidUserWarning.hide(false, true);
     _lnUsername.clean();
     _lnPassword.clean();
+}
+
+bool LoginView::onClick(gui::Button *pBtn)
+{
+    if (pBtn == &_btnSignIn)
+        return handleClickOnSignInButton();
+    else if (pBtn == &_btnRegister) {
+        ComponentUtils::openWindow(getParentWindow(), new RegisterWindow());
+        return true;
+    }
     return false;
 }
+

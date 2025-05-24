@@ -7,7 +7,7 @@
 
 #include <gui/Control.h>
 
-class ComponentStyle{
+class ComponentUtils{
 
 public:
 
@@ -19,6 +19,12 @@ public:
     static void setLabelWarningStyle(gui::Control& label) {
         label.setTextColor(td::Accent::Critical);
         label.hide(true, true);
+    }
+
+    static void openWindow(gui::Window* parentWindow, gui::Window* window) {
+        parentWindow->close();
+        window->keepOnTopOfParent();
+        window->open();
     }
 
 };
