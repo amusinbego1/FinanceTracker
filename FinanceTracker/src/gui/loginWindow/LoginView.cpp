@@ -7,7 +7,9 @@ LoginView::LoginView()
     : _lblUsername(tr("username"))
     , _lblPassword(tr("password"))
     , _btnSignIn(tr("signIn"))
+    , _btnRegister(tr("register"))
     , _hLayout(3)
+    , _buttonHLayout(2)
     , _vLayout(9)
 {
    arrangeElements();
@@ -15,7 +17,13 @@ LoginView::LoginView()
 
 void LoginView::arrangeElements() {
     _btnSignIn.setSize(gui::Size(75, 40));
+    _btnRegister.setSize(gui::Size(75, 40));
     _btnSignIn.setFont(gui::Font::ID::SystemBold);
+    _btnRegister.setFont(gui::Font::ID::SystemBold);
+
+    _buttonHLayout.append(_btnRegister);
+    _btnRegister.hide(true, true);
+    _buttonHLayout.append(_btnSignIn);
 
     _vLayout.appendSpacer(4);
     _vLayout.append(_lblUsername, td::HAlignment::Left);
@@ -24,7 +32,7 @@ void LoginView::arrangeElements() {
     _vLayout.append(_lblPassword, td::HAlignment::Left);
     _vLayout.append(_lnPassword);
     _vLayout.appendSpacer(2);
-    _vLayout.append(_btnSignIn);
+    _vLayout.append(_buttonHLayout);
     _vLayout.appendSpacer(4);
 
     _hLayout.appendSpacer();

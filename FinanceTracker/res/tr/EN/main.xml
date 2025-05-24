@@ -3,6 +3,7 @@
 	<Translations>
 		<Res id="open" tr="Open"/>
 		<Res id="signIn" tr="Sign In"/>
+		<Res id="register" tr="Register"/>
 		<Res id="username" tr="Username"/>
 		<Res id="password" tr="Password"/>
 		<Res id="save" tr="Save"/>

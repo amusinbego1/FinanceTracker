@@ -3,6 +3,7 @@
 	<Translations>
 		<Res id="open" tr="Otvori"/>
 		<Res id="signIn" tr="Prijava"/>
+		<Res id="register" tr="Registracija"/>
 		<Res id="username" tr="Korisničko ime"/>
 		<Res id="password" tr="Lozinka"/>
 		<Res id="save" tr="Snimi"/>
