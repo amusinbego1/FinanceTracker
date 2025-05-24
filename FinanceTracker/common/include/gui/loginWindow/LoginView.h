@@ -20,10 +20,18 @@
 class LoginView : public gui::View
 {
     void arrangeElements();
+    void setStyles();
+    void arrangeButtonLayout();
+    void arrangeVerticalInputLayout();
+    void arrangeMainHorizontalLayout();
+    bool hangleClickOnSignInButton();
+    bool showInfoForValidCredentials(const User &loggedInUser);
+    bool showWarningForInvalidCredentials();
 protected:
     gui::Label _lblUsername;
     gui::LineEdit _lnUsername;
     gui::Label _lblPassword;
+    gui::Label _lblInvalidUserWarning;
     gui::PasswordEdit _lnPassword;
     gui::Button _btnSignIn;
     gui::Button _btnRegister;
@@ -37,21 +45,7 @@ public:
     bool onClick(gui::Button* pBtn) override
     {
         if (pBtn == &_btnSignIn)
-        {
-            td::Variant username, password;
-            _lnUsername.getValue(username);
-            _lnPassword.getValue(password);
-            UserRepository& userRepo = UserRepository::getInstance();
-            std::optional<User> user_optional = userRepo.findUserByUsernameAndPassword(username.strVal(), password.strVal());
-            if(user_optional.has_value()) {
-                showInfo("Success", "Successfully logged");
-                return true;
-            }
-            showAlert("Fail", "No user with given credentials");
-            _btnRegister.hide(false, true);
-            _lnUsername.clean();
-            _lnPassword.clean();
-        }
+            return hangleClickOnSignInButton();
         return false;
     }
 
