@@ -3,6 +3,7 @@
 	<Translations>
 		<Res id="open" tr="Open"/>
 		<Res id="signIn" tr="Sign In"/>
+		<Res id="signOut" tr="Sign Out"/>
 		<Res id="register" tr="Register"/>
 		<Res id="cancel" tr="Cancel"/>
 		<Res id="invalidUserWarning" tr="Incorrect username or password. Did you mean to register?"/>

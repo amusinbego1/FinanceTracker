@@ -27,7 +27,7 @@ namespace UiElements {
     constexpr UiElementId LanguageSwitch{10, 0, 0, 10};
     constexpr UiElementId Username{20, 0, 0, 20};
     constexpr UiElementId LoginButton{11, 0, 0, 20};
-    constexpr UiElementId LogoutButton{11, 0, 0, 21};
+    constexpr UiElementId SignoutButton{11, 0, 0, 21};
 
     inline bool checkUiElement(const std::tuple<td::BYTE, td::BYTE, td::BYTE, td::BYTE>& ids, const UiElementId& element_id) {
         return ids == element_id.asTuple();

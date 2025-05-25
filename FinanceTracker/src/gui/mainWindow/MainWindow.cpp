@@ -7,12 +7,16 @@
 #include <gui/Application.h>
 
 #include <utility>
+#include <gui/loginWindow/LoginWindow.h>
+#include <gui/utils/ComponentUtils.h>
 
 bool MainWindow::onActionItem(gui::ActionItemDescriptor &aiDesc) {
     const auto &ids = aiDesc.getIDs();
 
     if (UiElements::checkUiElement(ids, UiElements::LanguageSwitch)) {
         changeLanguage();
+    } else if (UiElements::checkUiElement(ids, UiElements::SignoutButton)) {
+        ComponentUtils::openWindow(getContainingWindow(), new LoginWindow());
     }
 
     return true;

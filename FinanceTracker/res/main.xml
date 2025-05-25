@@ -3,6 +3,7 @@
 	<Images>
 		<Res id="languageSwitch" path="Work/Common/Icons/FinanceTracker/languageSwitch.png"/>-->
 		<Res id="username" path="Work/Common/Icons/FinanceTracker/username.png"/>-->
+		<Res id="logout" path="Work/Common/Icons/FinanceTracker/logout.png"/>-->
 	</Images>
 	<Symbols>
 <!--		<Res id="LanguageButton" path="Work/Common/Symbols/FinanceTracker/languages.xml"/>-->

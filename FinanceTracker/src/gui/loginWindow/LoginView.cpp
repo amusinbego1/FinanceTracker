@@ -77,7 +77,7 @@ bool LoginView::handleClickOnSignInButton() {
     std::optional<User> user_optional = userRepo.findUserByUsernameAndPassword(username.strVal(), password.strVal());
 
     if(user_optional.has_value()) {
-        ComponentUtils::openWindow(getParentWindow(), new MainWindow(user_optional.value()));
+        ComponentUtils::openWindow(getContainingWindow(), new MainWindow(user_optional.value()));
         return true;
     }
     showWarningForInvalidCredentials();
@@ -100,7 +100,7 @@ bool LoginView::onClick(gui::Button *pBtn)
     if (pBtn == &_btnSignIn)
         return handleClickOnSignInButton();
     else if (pBtn == &_btnRegister) {
-        ComponentUtils::openWindow(getParentWindow(), new RegisterWindow());
+        ComponentUtils::openWindow(getContainingWindow(), new RegisterWindow());
         return true;
     }
     return false;

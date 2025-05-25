@@ -82,7 +82,7 @@ void RegisterView::arrangeMainHorizontalLayout() {
 bool RegisterView::onClick(gui::Button* pBtn)
 {
     if (pBtn == &_btnCancel) {
-        ComponentUtils::openWindow(getParentWindow(), new LoginWindow());
+        ComponentUtils::openWindow(getContainingWindow(), new LoginWindow());
         return true;
     } else if (pBtn== &_btnRegister) {
         return handleClickOnRegisterButton();
@@ -100,7 +100,7 @@ bool RegisterView::handleClickOnRegisterButton() {
     if (isValidRegisterInput(username.strVal(), password.strVal(), confirmPassword.strVal())) {
         registerNewUser(username.strVal(), password.strVal());
         User user = UserRepository::getInstance().findUserByUsernameAndPassword(username.strVal(), password.strVal()).value();
-        ComponentUtils::openWindow(getParentWindow(), new MainWindow(user));
+        ComponentUtils::openWindow(getContainingWindow(), new MainWindow(user));
         return true;
     }
     return false;
