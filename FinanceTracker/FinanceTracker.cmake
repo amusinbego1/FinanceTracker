@@ -21,7 +21,8 @@ add_executable(${FINANCE_TRACKER_NAME} ${FINANCE_TRACKER_SOURCES} ${FINANCE_TRAC
 
 
 add_compile_definitions(XML_PATH=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/Transactions.xml\")
-add_compile_definitions(DB_PATH=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/FinanceTracker.db\")
+#add_compile_definitions(DB_PATH=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/FinanceTracker.db\")
+add_compile_definitions(DB_PATH=\"${HOME_ROOT}/other_bin/TestData/FinanceTracker/FinanceTracker.db\")
 
 target_link_libraries(${FINANCE_TRACKER_NAME}
         debug ${MU_LIB_DEBUG} optimized ${MU_LIB_RELEASE}

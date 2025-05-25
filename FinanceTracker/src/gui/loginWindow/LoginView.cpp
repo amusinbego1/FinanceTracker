@@ -3,6 +3,7 @@
 //
 #include "gui/loginWindow/LoginView.h"
 
+#include <gui/mainWindow/MainWindow.h>
 #include <gui/registerWindow/RegisterWindow.h>
 
 #include "gui/utils/ComponentUtils.h"
@@ -76,8 +77,7 @@ bool LoginView::handleClickOnSignInButton() {
     std::optional<User> user_optional = userRepo.findUserByUsernameAndPassword(username.strVal(), password.strVal());
 
     if(user_optional.has_value()) {
-        showInfoForValidCredentials(user_optional.value());
-        //TODO: open main window tih the signed in user
+        ComponentUtils::openWindow(getParentWindow(), new MainWindow(user_optional.value()));
         return true;
     }
     showWarningForInvalidCredentials();

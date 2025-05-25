@@ -4,6 +4,7 @@
 #include "gui/registerWindow/RegisterView.h"
 
 #include <gui/loginWindow/LoginWindow.h>
+#include <gui/mainWindow/MainWindow.h>
 
 #include "gui/utils/ComponentUtils.h"
 
@@ -98,8 +99,8 @@ bool RegisterView::handleClickOnRegisterButton() {
 
     if (isValidRegisterInput(username.strVal(), password.strVal(), confirmPassword.strVal())) {
         registerNewUser(username.strVal(), password.strVal());
-        showInfoForValidCredentials(username.strVal());
-        //TODO: open main window with newly created user
+        User user = UserRepository::getInstance().findUserByUsernameAndPassword(username.strVal(), password.strVal()).value();
+        ComponentUtils::openWindow(getParentWindow(), new MainWindow(user));
         return true;
     }
     return false;
@@ -129,7 +130,6 @@ bool RegisterView::isValidRegisterInput(const td::String& username, const td::St
 }
 
 void RegisterView::registerNewUser(const td::String& username, const td::String& password) {
-    //TODO: check why it does not work
     auto& userRepo = UserRepository::getInstance();
     userRepo.saveUser(User{0, username, password});
 }

@@ -6,21 +6,24 @@
 #define MAINWINDOW_H
 
 #include <gui/Window.h>
-#include <gui/loginWindow/LoginWindow.h>
+#include <gui/utils/languages/MultilingualWindow.h>
+#include "gui/mainWindow/MainToolBar.h"
+#include "gui/mainWindow/MainView.h"
+#include "domain/User.h"
 
-class MainWindow : public gui::Window
-{
+class MainWindow : public gui::Window, private MultilingualWindow {
+
+    User _user;
+protected:
+    MainToolBar _toolBar;
+    MainView _mainView;
+
+    bool onActionItem(gui::ActionItemDescriptor &aiDesc) override ;
+
 public:
-    MainWindow()
-    : gui::Window(gui::Geometry(50, 250, 1200, 800))
-    {
-        setTitle("First App");
-        //        composeContent();
-    }
+    MainWindow(User user);
 
-    ~MainWindow()
-    {
-    }
+    virtual ~MainWindow() = default;
 };
 
 

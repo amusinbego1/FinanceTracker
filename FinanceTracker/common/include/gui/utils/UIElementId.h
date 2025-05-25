@@ -25,6 +25,7 @@ struct UiElementId {
 // Named constants (like enum entries)
 namespace UiElements {
     constexpr UiElementId LanguageSwitch{10, 0, 0, 10};
+    constexpr UiElementId Username{20, 0, 0, 20};
     constexpr UiElementId LoginButton{11, 0, 0, 20};
     constexpr UiElementId LogoutButton{11, 0, 0, 21};
 
