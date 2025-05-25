@@ -78,6 +78,7 @@ bool LoginView::handleClickOnSignInButton() {
 
     if(user_optional.has_value()) {
         ComponentUtils::openWindow(getContainingWindow(), new MainWindow(user_optional.value()));
+        std::cout << user_optional.value().username << td::endl;
         return true;
     }
     showWarningForInvalidCredentials();

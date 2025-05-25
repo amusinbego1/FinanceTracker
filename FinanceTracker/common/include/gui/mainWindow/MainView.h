@@ -7,6 +7,8 @@
 
 #include <gui/Button.h>
 
+#include <service/TransactionService.h>
+
 #include "domain/User.h"
 #include <gui/VerticalLayout.h>
 #include <gui/HorizontalLayout.h>
@@ -16,12 +18,15 @@
 class MainView : public gui::View
 {
 User _user;
+TransactionService& _transactionService;;
 
+    void setStyles();
     void arrangeElements();
     void arrangeOverviewLayout();
     void arrangeFirstRowLayout();
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
+    const char* formatDecimal2ToString(const td::Decimal2& number);
 protected:
     //Overview
     gui::Label _lblOverview;
