@@ -18,5 +18,10 @@
 		<Res id="success" tr="Success"/>
 		<Res id="welcome" tr="Welcome "/>
 		<Res id="welcomeBack" tr="Welcome back "/>
+		<Res id="overview" tr="Overview"/>
+		<Res id="balance" tr="$ Balance"/>
+		<Res id="income" tr="↑ Income"/>
+		<Res id="expense" tr="↓ Expense"/>
+
 	</Translations>
 </DevRes>

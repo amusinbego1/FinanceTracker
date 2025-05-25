@@ -18,5 +18,9 @@
 		<Res id="success" tr="Uspješno"/>
 		<Res id="welcome" tr="Dobrodošao/la "/>
 		<Res id="welcomeBack" tr="Dobrodošao/la ponovo "/>
+		<Res id="overview" tr="Pregled"/>
+		<Res id="balance" tr="$ Stanje"/>
+		<Res id="income" tr="↑ Zarada"/>
+		<Res id="expense" tr="↓ Trošak"/>
 	</Translations>
 </DevRes>
