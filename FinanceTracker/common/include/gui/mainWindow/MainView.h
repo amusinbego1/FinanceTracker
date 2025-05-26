@@ -36,9 +36,15 @@ TransactionService& _transactionService;;
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
 
+    void initComboBoxes();
+    void onChangeCategoryComboBox();
+
     void changeGraphToBalance();
     void changeGraphToIncome();
     void changeGraphToExpense();
+    void handleCancelButton();
+    void handleSaveButton();
+
     const char* formatDecimal2ToString(const td::Decimal2& number);
 protected:
     //Overview
@@ -90,6 +96,8 @@ public:
     virtual ~MainView() = default;
 
     bool onClick(gui::Button* pBtn) override;
+
+    bool onChangedSelection(gui::ComboBox* pCmb);
 };
 
 #endif //MAINVIEW_H

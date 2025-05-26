@@ -55,6 +55,7 @@ MainView::MainView(User user):
     _vTransactionHistoryLayout(2)
 {
     setStyles();
+    initComboBoxes();
     arrangeElements();
 }
 
@@ -78,6 +79,20 @@ void MainView::setStyles() {
     ComponentUtils::setTitleStyle(_donutReplacement);
     ComponentUtils::setDefaultButtonStyle(_btnSave);
     ComponentUtils::setDefaultButtonStyle(_btnCancel);
+}
+
+void MainView::initComboBoxes() {
+    _cbCategory.addItems(std::vector<td::String>{"INCOME", "EXPENSE"});
+    _cbCategory.selectIndex(0);
+
+    _cbType.addItems(ComponentUtils::getIncomes());
+    _cbType.selectIndex(0);
+}
+
+void MainView::onChangeCategoryComboBox() {
+    _cbType.clean();
+    _cbType.addItems(_cbCategory.getSelectedIndex() == 0 ? ComponentUtils::getIncomes(): ComponentUtils::getExpenses());
+    _cbType.selectIndex(0);
 }
 
 
@@ -172,7 +187,17 @@ bool MainView::onClick(gui::Button* pBtn){
         changeGraphToIncome();
     else if (pBtn == &_btnExpense)
         changeGraphToExpense();
+    else if (pBtn == &_btnCancel)
+        handleCancelButton();
+    else if (pBtn == &_btnSave)
+        handleSaveButton();
 
+    return true;
+}
+
+bool MainView::onChangedSelection(gui::ComboBox* pCmb) {
+    if (pCmb == &_cbCategory)
+        onChangeCategoryComboBox();
     return true;
 }
 
@@ -190,5 +215,19 @@ void MainView::changeGraphToExpense(){
     _lblGraph.setTitle(tr("expense"));
     //TODO: implement graph change to expense
 }
+
+void MainView::handleCancelButton() {
+    td::Date now; now.now();
+    _dateEdit.setValue(now);
+    _cbCategory.selectIndex(0);
+    _cbType.selectIndex(0);
+    _neAmount.setValue(td::Decimal2(0.0));
+}
+
+void MainView::handleSaveButton() {
+    // TODO: implement adding new transactions
+}
+
+
 
 
