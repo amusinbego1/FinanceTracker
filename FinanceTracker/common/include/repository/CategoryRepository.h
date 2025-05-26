@@ -23,8 +23,8 @@ public:
     //Interface
     void saveCategory(const Category&);
     std::optional<Category> findCategoryByNameAndType(const td::String& name, const CategoryType& type);
-    cnt::PushBackVector<Category> findAllExpenses();
-    cnt::PushBackVector<Category> findAllIncomes();
+    std::vector<Category> findAllExpenses();
+    std::vector<Category> findAllIncomes();
     //
 
 private:
@@ -34,7 +34,7 @@ private:
 
     CategoryRepository() = default;
 
-    cnt::PushBackVector<Category> findAllCategories(const CategoryType&);
+    std::vector<Category> findAllCategories(const CategoryType&);
 
 };
 

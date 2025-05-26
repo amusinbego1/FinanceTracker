@@ -50,8 +50,8 @@ std::optional<Category> CategoryRepository::findCategoryByNameAndType(const td::
     return Category{category_id, name, type};
 }
 
-cnt::PushBackVector<Category> CategoryRepository::findAllCategories(const CategoryType& type){
-    cnt::PushBackVector<Category> categories;
+std::vector<Category> CategoryRepository::findAllCategories(const CategoryType& type){
+    std::vector<Category> categories;
     Category category;
     category.type = type;
 
@@ -76,10 +76,10 @@ cnt::PushBackVector<Category> CategoryRepository::findAllCategories(const Catego
     return categories;
 }
 
-cnt::PushBackVector<Category> CategoryRepository::findAllExpenses() {
+std::vector<Category> CategoryRepository::findAllExpenses() {
     return findAllCategories(CategoryType::EXPENSE);
 }
 
-cnt::PushBackVector<Category> CategoryRepository::findAllIncomes() {
+std::vector<Category> CategoryRepository::findAllIncomes() {
     return findAllCategories(CategoryType::INCOME);
 }
