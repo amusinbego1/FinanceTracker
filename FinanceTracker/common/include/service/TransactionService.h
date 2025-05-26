@@ -19,6 +19,7 @@ public:
 
     static TransactionService& getInstance(const User& user) {
         static TransactionService instance(user);
+        instance.setUser(user);
         return instance;
     }
 
@@ -52,8 +53,10 @@ public:
     }
 
     void setUser(const User& user) {
-        user_ = user;
-        cache_.invalidate();
+        if (user_.id != user.id) {
+            user_ = user;
+            cache_.invalidate();
+        }
     }
 
 private:
