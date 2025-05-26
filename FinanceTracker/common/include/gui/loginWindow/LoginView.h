@@ -40,6 +40,8 @@ protected:
 public:
     LoginView();
 
+    virtual ~LoginView() = default;
+
     bool onClick(gui::Button* pBtn) override;
 
 

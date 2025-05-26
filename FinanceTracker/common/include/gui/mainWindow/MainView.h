@@ -23,9 +23,14 @@ TransactionService& _transactionService;;
     void setStyles();
     void arrangeElements();
     void arrangeOverviewLayout();
+    void arrangeGraphLayout();
     void arrangeFirstRowLayout();
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
+
+    void changeGraphToBalance();
+    void changeGraphToIncome();
+    void changeGraphToExpense();
     const char* formatDecimal2ToString(const td::Decimal2& number);
 protected:
     //Overview
@@ -33,6 +38,10 @@ protected:
     gui::Button _btnBalance;
     gui::Button _btnIncome;
     gui::Button _btnExpense;
+
+    //Graph
+    gui::Label _lblGraph;
+    gui::Label _graphReplacement;
 
     //LAYOUTS
     gui::HorizontalLayout _hMainLayout;
@@ -56,6 +65,8 @@ public:
     MainView(User user);
 
     virtual ~MainView() = default;
+
+    bool onClick(gui::Button* pBtn) override;
 };
 
 #endif //MAINVIEW_H
