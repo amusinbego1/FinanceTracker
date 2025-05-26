@@ -23,6 +23,21 @@ MainView::MainView(User user):
     _lblGraph(tr("balance")),
     _graphReplacement("Line chart replacement"),
 
+// INPUT
+    _lblAddNewTransaction(tr("addNewTransaction")),
+
+    _dateEdit(tr("date")),
+    _cbCategory(tr("category")),
+    _cbType(tr("type")),
+    _neAmount(td::DataType::decimal2, gui::LineEdit::Messages::DoNotSend, true, tr("amount")),
+
+    _btnCancel(tr("cancel")),
+    _btnSave(tr("save")),
+
+// DONUT
+    _lblExpenseByCategory(tr("expenseByCategory")),
+    _donutReplacement("Donut chart replacement"),
+
 // LAYOUTS
     _hMainLayout(3),
     _vCentralMainLayout(7),
@@ -33,9 +48,9 @@ MainView::MainView(User user):
 
     _hSecondRowLayout(3),
     _vNewTransactionLayout(3),
-    _vNewDonutLayout(2),
+    _vDonutLayout(2),
     _hInputLayout(4),
-    _hButtonLayout(3),
+    _hButtonLayout(5),
 
     _vTransactionHistoryLayout(2)
 {
@@ -58,13 +73,21 @@ void MainView::setStyles() {
     ComponentUtils::setTitleStyle(_lblOverview);
     ComponentUtils::setTitleStyle(_lblGraph);
     ComponentUtils::setTitleStyle(_graphReplacement);
+    ComponentUtils::setTitleStyle(_lblAddNewTransaction);
+    ComponentUtils::setTitleStyle(_lblExpenseByCategory);
+    ComponentUtils::setTitleStyle(_donutReplacement);
+    ComponentUtils::setDefaultButtonStyle(_btnSave);
+    ComponentUtils::setDefaultButtonStyle(_btnCancel);
 }
 
 
 void MainView::arrangeElements() {
     arrangeOverviewLayout();
     arrangeGraphLayout();
+    arrangeNewTransactionLayout();
+    arrangeDonutLayout();
     arrangeFirstRowLayout();
+    arrangeSecondRowLayout();
     arrangeVerticalCentralLayout();
     arrangeMainLayout();
 }
@@ -82,11 +105,47 @@ void MainView::arrangeGraphLayout() {
     _vGraphLayout.append(_graphReplacement);
 }
 
+void MainView::arrangeNewTransactionLayout() {
+    arrangeInputLayout();
+    arrangeButtonLayout();
+    _vNewTransactionLayout.append(_lblAddNewTransaction, td::HAlignment::Left);
+    _vNewTransactionLayout.appendLayout(_hInputLayout);
+    _vNewTransactionLayout.appendLayout(_hButtonLayout);
+}
+
+void MainView::arrangeInputLayout() {
+    _hInputLayout.append(_dateEdit);
+    _hInputLayout.append(_cbCategory);
+    _hInputLayout.append(_cbType);
+    _hInputLayout.append(_neAmount);
+}
+
+void MainView::arrangeButtonLayout() {
+    _hButtonLayout.appendSpacer();
+    _hButtonLayout.append(_btnCancel);
+    _hButtonLayout.appendSpacer(3);
+    _hButtonLayout.append(_btnSave);
+    _hButtonLayout.appendSpacer();
+}
+
+void MainView::arrangeDonutLayout() {
+    _vDonutLayout.append(_lblExpenseByCategory, td::HAlignment::Left);
+    _vDonutLayout.append(_donutReplacement);
+}
+
+
 
 void MainView::arrangeFirstRowLayout(){
     _hFirstRowLayout.appendLayout(_vOverviewLayout);
     _hFirstRowLayout.appendSpacer();
     _hFirstRowLayout.appendLayout(_vGraphLayout);
+}
+
+void MainView::arrangeSecondRowLayout() {
+    _hSecondRowLayout.appendLayout(_vNewTransactionLayout);
+    _hSecondRowLayout.appendSpacer(5);
+    _hSecondRowLayout.appendLayout(_vDonutLayout);
+
 }
 
 void MainView::arrangeVerticalCentralLayout(){

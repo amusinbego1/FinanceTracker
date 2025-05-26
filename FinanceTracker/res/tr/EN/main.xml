@@ -22,6 +22,11 @@
 		<Res id="balance" tr="$ Balance"/>
 		<Res id="income" tr="↑ Income"/>
 		<Res id="expense" tr="↓ Expense"/>
-
+		<Res id="expenseByCategory" tr="Expense by Category"/>
+		<Res id="addNewTransaction" tr="Add New Transaction"/>
+		<Res id="date" tr="Date"/>
+		<Res id="category" tr="Category"/>
+		<Res id="type" tr="Type"/>
+		<Res id="amount" tr="Amount"/>
 	</Translations>
 </DevRes>

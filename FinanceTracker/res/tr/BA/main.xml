@@ -12,7 +12,7 @@
 		<Res id="password" tr="Lozinka"/>
 		<Res id="confirmPassword" tr="Potvrdi lozinku"/>
 		<Res id="invalidPassword" tr="Lozinke se ne poklapaju"/>
-		<Res id="save" tr="Snimi"/>
+		<Res id="save" tr="Sačuvaj"/>
 		<Res id="languageSwitch" tr="Promijeni jezik"/>
 		<Res id="languageSwitched" tr="Jezik promijenjen"/>
 		<Res id="success" tr="Uspješno"/>
@@ -22,5 +22,11 @@
 		<Res id="balance" tr="$ Stanje"/>
 		<Res id="income" tr="↑ Zarada"/>
 		<Res id="expense" tr="↓ Trošak"/>
+		<Res id="expenseByCategory" tr="Trošak po kategoriji"/>
+		<Res id="addNewTransaction" tr="Dodaj novu transakciju"/>
+		<Res id="date" tr="Datum"/>
+		<Res id="category" tr="Kategorija"/>
+		<Res id="type" tr="Vrsta"/>
+		<Res id="amount" tr="Količina"/>
 	</Translations>
 </DevRes>

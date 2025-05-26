@@ -13,6 +13,9 @@
 #include <gui/VerticalLayout.h>
 #include <gui/HorizontalLayout.h>
 #include <gui/Label.h>
+#include <gui/NumericEdit.h>
+#include <gui/ComboBox.h>
+#include <gui/DateEdit.h>
 #include <gui/View.h>
 
 class MainView : public gui::View
@@ -24,7 +27,12 @@ TransactionService& _transactionService;;
     void arrangeElements();
     void arrangeOverviewLayout();
     void arrangeGraphLayout();
+    void arrangeNewTransactionLayout();
+    void arrangeDonutLayout();
+    void arrangeInputLayout();
+    void arrangeButtonLayout();
     void arrangeFirstRowLayout();
+    void arrangeSecondRowLayout();
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
 
@@ -43,6 +51,21 @@ protected:
     gui::Label _lblGraph;
     gui::Label _graphReplacement;
 
+    //Input
+    gui::Label _lblAddNewTransaction;
+
+    gui::DateEdit _dateEdit;
+    gui::ComboBox _cbCategory;
+    gui::ComboBox _cbType;
+    gui::NumericEdit _neAmount;
+
+    gui::Button _btnCancel;
+    gui::Button _btnSave;
+
+    //Donut
+    gui::Label _lblExpenseByCategory;
+    gui::Label _donutReplacement;
+
     //LAYOUTS
     gui::HorizontalLayout _hMainLayout;
     gui::VerticalLayout _vCentralMainLayout;
@@ -53,7 +76,7 @@ protected:
 
     gui::HorizontalLayout _hSecondRowLayout;
     gui::VerticalLayout _vNewTransactionLayout;
-    gui::VerticalLayout _vNewDonutLayout;
+    gui::VerticalLayout _vDonutLayout;
     gui::HorizontalLayout _hInputLayout;
     gui::HorizontalLayout _hButtonLayout;
 
