@@ -28,5 +28,8 @@
 		<Res id="category" tr="Category"/>
 		<Res id="type" tr="Type"/>
 		<Res id="amount" tr="Amount"/>
+		<Res id="currency" tr="Currency"/>
+		<Res id="transactionHistory" tr="Transaction History"/>
+		<Res id="id" tr="ID"/>
 	</Translations>
 </DevRes>

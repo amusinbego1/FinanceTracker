@@ -8,6 +8,9 @@
 #include "domain/Transaction.h"
 
 class TransactionRepository: public BaseRepository{
+
+    static dp::IDataSetPtr _dataSetPtr;
+
 public:
     static TransactionRepository& getInstance() {
         static TransactionRepository instance;
@@ -22,12 +25,14 @@ public:
     //Interface
     void saveTransaction(const Transaction&);
     std::vector<Transaction> findTransactionsByUser(const User&);
+    dp::IDataSetPtr& findTransactionsByUserIDataSetPtr (const User&);
     void deleteTransaction(const Transaction&);
     //
 
 private:
     static const char * INSERT_TRANSACTION_SQL;
     static const char * FIND_TRANSACTIONS_BY_USER_SQL;
+    static const char * FIND_TRANSACTIONS_BY_USER_SQL2;
     static const char * DELETE_TRANSACTIONS_BY_ID_SQL;
 
     TransactionRepository() = default;

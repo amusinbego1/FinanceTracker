@@ -28,5 +28,9 @@
 		<Res id="category" tr="Kategorija"/>
 		<Res id="type" tr="Vrsta"/>
 		<Res id="amount" tr="Količina"/>
+		<Res id="currency" tr="Valuta"/>
+		<Res id="transactionHistory" tr="Historija Transakcija"/>
+		<Res id="id" tr="ID"/>
+type
 	</Translations>
 </DevRes>

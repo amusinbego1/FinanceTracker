@@ -16,6 +16,7 @@
 #include <gui/NumericEdit.h>
 #include <gui/ComboBox.h>
 #include <gui/DateEdit.h>
+#include <gui/TableEdit.h>
 #include <gui/View.h>
 
 class MainView : public gui::View
@@ -33,11 +34,15 @@ TransactionService& _transactionService;;
     void arrangeButtonLayout();
     void arrangeFirstRowLayout();
     void arrangeSecondRowLayout();
+    void arrangeThirdRowLayout();
+    void arrangeTransactionHistoryLayout();
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
 
     void initComboBoxes();
     void onChangeCategoryComboBox();
+
+    void initTable();
 
     void changeGraphToBalance();
     void changeGraphToIncome();
@@ -72,6 +77,11 @@ protected:
     gui::Label _lblExpenseByCategory;
     gui::Label _donutReplacement;
 
+    //Transaction History
+    gui::Label _lblTransactionHistory;
+    gui::TableEdit _tblTransactionHistory;
+    dp::IDataSetPtr _dataSetPtr;
+
     //LAYOUTS
     gui::HorizontalLayout _hMainLayout;
     gui::VerticalLayout _vCentralMainLayout;
@@ -86,6 +96,8 @@ protected:
     gui::HorizontalLayout _hInputLayout;
     gui::HorizontalLayout _hButtonLayout;
 
+
+    gui::HorizontalLayout _hThirdRowLayout;
     gui::VerticalLayout _vTransactionHistoryLayout;
 
 

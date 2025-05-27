@@ -38,6 +38,9 @@ MainView::MainView(User user):
     _lblExpenseByCategory(tr("expenseByCategory")),
     _donutReplacement("Donut chart replacement"),
 
+// TRANSACTION HISTORY
+    _lblTransactionHistory(tr("transactionHistory")),
+
 // LAYOUTS
     _hMainLayout(3),
     _vCentralMainLayout(7),
@@ -52,11 +55,13 @@ MainView::MainView(User user):
     _hInputLayout(4),
     _hButtonLayout(5),
 
+    _hThirdRowLayout(3),
     _vTransactionHistoryLayout(2)
 {
     setStyles();
     initComboBoxes();
     arrangeElements();
+    initTable();
 }
 
 const char* MainView::formatDecimal2ToString(const td::Decimal2& number) {
@@ -77,6 +82,7 @@ void MainView::setStyles() {
     ComponentUtils::setTitleStyle(_lblAddNewTransaction);
     ComponentUtils::setTitleStyle(_lblExpenseByCategory);
     ComponentUtils::setTitleStyle(_donutReplacement);
+    ComponentUtils::setTitleStyle(_lblTransactionHistory);
     ComponentUtils::setDefaultButtonStyle(_btnSave);
     ComponentUtils::setDefaultButtonStyle(_btnCancel);
 }
@@ -87,6 +93,20 @@ void MainView::initComboBoxes() {
 
     _cbType.addItems(ComponentUtils::getIncomes());
     _cbType.selectIndex(0);
+}
+
+void MainView::initTable() {
+    _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
+
+    gui::Columns visCols(_tblTransactionHistory.allocBindColumns(6));
+    visCols << gui::ThSep::DoNotShowThSep
+    << gui::Header(0, tr("id"), tr("id"), 100)
+    << td::Date::Format::ShortY4 << gui::Header(5, tr("date"), tr("date"),150)
+    << gui::Header(1, tr("category"), tr("category"), 170)
+    << gui::Header(2, tr("type"), tr("type"), 100, td::HAlignment::Right)
+    << gui::Header(3, tr("amount"), tr("amount"), 100, td::HAlignment::Right)
+    << gui::Header(4, tr("currency"), tr("currency"), 100, td::HAlignment::Left);
+    _tblTransactionHistory.init(_dataSetPtr);
 }
 
 void MainView::onChangeCategoryComboBox() {
@@ -101,8 +121,10 @@ void MainView::arrangeElements() {
     arrangeGraphLayout();
     arrangeNewTransactionLayout();
     arrangeDonutLayout();
+    arrangeTransactionHistoryLayout();
     arrangeFirstRowLayout();
     arrangeSecondRowLayout();
+    arrangeThirdRowLayout();
     arrangeVerticalCentralLayout();
     arrangeMainLayout();
 }
@@ -163,13 +185,27 @@ void MainView::arrangeSecondRowLayout() {
 
 }
 
+void MainView::arrangeThirdRowLayout() {
+    _hThirdRowLayout.appendSpacer();
+    _hThirdRowLayout.append(_vTransactionHistoryLayout, td::HAlignment::Center);
+    _hThirdRowLayout.appendSpacer();
+}
+
+
+void MainView::arrangeTransactionHistoryLayout() {
+    _vTransactionHistoryLayout.append(_lblTransactionHistory);
+    _tblTransactionHistory.setSize(gui::Size(500, 50));
+    _vTransactionHistoryLayout.append(_tblTransactionHistory);
+}
+
+
 void MainView::arrangeVerticalCentralLayout(){
     _vCentralMainLayout.appendSpacer(2);
     _vCentralMainLayout.appendLayout(_hFirstRowLayout);
     _vCentralMainLayout.appendSpacer(1);
     _vCentralMainLayout.appendLayout(_hSecondRowLayout);
     _vCentralMainLayout.appendSpacer(1);
-    _vCentralMainLayout.appendLayout(_vTransactionHistoryLayout);
+    _vCentralMainLayout.appendLayout(_hThirdRowLayout);
     _vCentralMainLayout.appendSpacer(2);
 }
 

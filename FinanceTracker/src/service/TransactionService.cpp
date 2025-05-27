@@ -3,13 +3,16 @@
 //
 
 #include "service/TransactionService.h"
-
+#include "repository/TransactionRepository.h"
 #include <map>
 
 const std::vector<Transaction>& TransactionService::getAllTransactions(TransactionSortField sortBy) {
     return cache_.findAllTransactions(user_, sortBy);
 }
 
+dp::IDataSetPtr& TransactionService::findTransactionsIDataSetPtr() {
+    return TransactionRepository::getInstance().findTransactionsByUserIDataSetPtr(user_);
+}
 
 ServiceUtils::Summary TransactionService::getSummary() {
     const auto& transactions = cache_.findAllTransactions(user_);

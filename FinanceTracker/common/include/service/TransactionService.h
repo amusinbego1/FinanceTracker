@@ -38,6 +38,7 @@ public:
         cache_.invalidate();
     }
     const std::vector<Transaction>& getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
+    dp::IDataSetPtr& findTransactionsIDataSetPtr();
     td::String writeTransactionsToXml() {
         xml_writer_.write(getAllTransactions(TransactionSortField::NoSort));
         return XML_PATH;
