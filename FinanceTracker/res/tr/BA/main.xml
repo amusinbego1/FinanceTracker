@@ -16,6 +16,7 @@
 		<Res id="languageSwitch" tr="Promijeni jezik"/>
 		<Res id="languageSwitched" tr="Jezik promijenjen"/>
 		<Res id="success" tr="Uspješno"/>
+		<Res id="successfulExport" tr="Transakcije su uspješno eksportovane u 'Transactions.xml'"/>
 		<Res id="welcome" tr="Dobrodošao/la "/>
 		<Res id="welcomeBack" tr="Dobrodošao/la ponovo "/>
 		<Res id="overview" tr="Pregled"/>
@@ -31,6 +32,8 @@
 		<Res id="currency" tr="Valuta"/>
 		<Res id="transactionHistory" tr="Historija Transakcija"/>
 		<Res id="id" tr="ID"/>
-type
+		<Res id="export" tr="Eksportuj u XML"/>
+		<Res id="delete" tr="Izbriši"/>
+
 	</Translations>
 </DevRes>

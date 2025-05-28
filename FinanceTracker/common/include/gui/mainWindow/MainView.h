@@ -34,6 +34,7 @@ class MainView : public gui::View
     void arrangeDonutLayout();
     void arrangeInputLayout();
     void arrangeButtonLayout();
+    void arrangeExportButtonLayout();
     void arrangeFirstRowLayout();
     void arrangeSecondRowLayout();
     void arrangeThirdRowLayout();
@@ -52,6 +53,8 @@ class MainView : public gui::View
     void changeGraphToExpense();
     bool handleCancelButton();
     bool handleSaveButton();
+    bool handleDeleteButton();
+    bool handleExportButton();
 
     const char* formatDecimal2ToString(const td::Decimal2& number);
 protected:
@@ -83,6 +86,8 @@ protected:
     //Transaction History
     gui::Label _lblTransactionHistory;
     gui::TableEdit _tblTransactionHistory;
+    gui::Button _btnExport;
+    gui::Button _btnDelete;
     dp::IDataSetPtr _dataSetPtr;
 
     //LAYOUTS
@@ -102,6 +107,8 @@ protected:
 
     gui::HorizontalLayout _hThirdRowLayout;
     gui::VerticalLayout _vTransactionHistoryLayout;
+    gui::HorizontalLayout _hTransactionHistoryLayout;
+    gui::VerticalLayout _vExportButtonLayout;
 
 
 

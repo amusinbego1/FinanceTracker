@@ -41,7 +41,8 @@ MainView::MainView(User user):
 
 // TRANSACTION HISTORY
     _lblTransactionHistory(tr("transactionHistory")),
-
+    _btnExport(tr("export")),
+    _btnDelete(tr("delete")),
 
 // LAYOUTS
     _hMainLayout(3),
@@ -58,7 +59,9 @@ MainView::MainView(User user):
     _hButtonLayout(5),
 
     _hThirdRowLayout(3),
-    _vTransactionHistoryLayout(2)
+    _vTransactionHistoryLayout(2),
+    _hTransactionHistoryLayout(2),
+    _vExportButtonLayout(2)
 {
     setStyles();
     initComboBoxes();
@@ -86,7 +89,11 @@ void MainView::setStyles() {
     ComponentUtils::setTitleStyle(_donutReplacement);
     ComponentUtils::setTitleStyle(_lblTransactionHistory);
     ComponentUtils::setDefaultButtonStyle(_btnSave);
+    _btnSave.setAsDefault();
     ComponentUtils::setDefaultButtonStyle(_btnCancel);
+    ComponentUtils::setDefaultButtonStyle(_btnDelete);
+    ComponentUtils::setDefaultButtonStyle(_btnExport);
+    _btnExport.setAsDefault();
 }
 
 void MainView::initComboBoxes() {
@@ -195,11 +202,23 @@ void MainView::arrangeThirdRowLayout() {
 }
 
 
+
+
 void MainView::arrangeTransactionHistoryLayout() {
-    _vTransactionHistoryLayout.append(_lblTransactionHistory);
     _tblTransactionHistory.setSize(gui::Size(500, 50));
-    _vTransactionHistoryLayout.append(_tblTransactionHistory);
+    _hTransactionHistoryLayout.append(_tblTransactionHistory);
+    arrangeExportButtonLayout();
+    _hTransactionHistoryLayout.appendLayout(_vExportButtonLayout);
+
+    _vTransactionHistoryLayout.append(_lblTransactionHistory);
+    _vTransactionHistoryLayout.appendLayout(_hTransactionHistoryLayout);
 }
+
+void MainView::arrangeExportButtonLayout() {
+    _vExportButtonLayout.append(_btnExport, td::HAlignment::Left, td::VAlignment::Top);
+    _vExportButtonLayout.append(_btnDelete, td::HAlignment::Left, td::VAlignment::Bottom);
+}
+
 
 
 void MainView::arrangeVerticalCentralLayout(){
@@ -230,6 +249,10 @@ bool MainView::onClick(gui::Button* pBtn){
         return handleCancelButton();
     else if (pBtn == &_btnSave)
         return handleSaveButton();
+    else if (pBtn == &_btnExport)
+        return handleExportButton();
+    else if (pBtn == &_btnDelete)
+        return handleDeleteButton();
 
     return true;
 }
@@ -292,20 +315,22 @@ bool MainView::handleSaveButton() {
 
 
 void MainView::reloadTable() {
-    // _tblTransactionHistory.clean();
-    // for (int i=0; i<_dataSetPtr->getNumberOfRows(); i++)
-    //     _dataSetPtr->removeRow(i);
-    // _tblTransactionHistory.beginUpdate();
-    // _dataSetPtr->removeAll();
-    // _dataSetPtr->release();
-    _tblTransactionHistory.getDataSet()->removeAll();
-    // _tblTransactionHistory.clean();
     _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
     _tblTransactionHistory.reload();
-    // _dataSetPtr->release();
-    // initTable(false);
-    // _tblTransactionHistory.selectRow(0);
 }
+
+bool MainView::handleDeleteButton() {
+    //TODO: implement delete functionality
+    std::cout << "Delete Butoon Pressed" << td::endl;
+    return true;
+}
+
+bool MainView::handleExportButton() {
+    _transactionService.writeTransactionsToXml();
+    showInfo(tr("success"), tr("successfulExport"));
+    return true;
+}
+
 
 
 

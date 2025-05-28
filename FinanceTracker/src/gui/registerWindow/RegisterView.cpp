@@ -36,6 +36,7 @@ void RegisterView::arrangeElements() {
 void RegisterView::setStyles() {
     ComponentUtils::setDefaultButtonStyle(_btnCancel);
     ComponentUtils::setDefaultButtonStyle(_btnRegister);
+    _btnRegister.setAsDefault();
     ComponentUtils::setLabelWarningStyle(_lblInvalidPassword);
     ComponentUtils::setLabelWarningStyle(_lblTooShortUsername);
 }

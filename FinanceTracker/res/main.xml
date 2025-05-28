@@ -1,10 +1,11 @@
 <?xml version='1.0'?>
 <DevRes>
 	<Images>
-		<Res id="languageSwitch" path="Work/Common/Icons/FinanceTracker/languageSwitch.png"/>-->
-		<Res id="username" path="Work/Common/Icons/FinanceTracker/username.png"/>-->
-		<Res id="logout" path="Work/Common/Icons/FinanceTracker/logout.png"/>-->
-		<Res id="graph" path="Work/Common/Images/FinanceTracker/chart.png"/>-->
+		<Res id="languageSwitch" path="Work/Common/Icons/FinanceTracker/languageSwitch.png"/>
+		<Res id="username" path="Work/Common/Icons/FinanceTracker/username.png"/>
+		<Res id="logout" path="Work/Common/Icons/FinanceTracker/logout.png"/>
+		<Res id="graph" path="Work/Common/Images/FinanceTracker/chart.png"/>
+		<Res id="export" path="Work/Common/Icons/FinanceTracker/export.png"/>
 	</Images>
 	<Symbols>
 <!--		<Res id="LanguageButton" path="Work/Common/Symbols/FinanceTracker/languages.xml"/>-->

@@ -16,6 +16,7 @@
 		<Res id="languageSwitch" tr="Change Language"/>
 		<Res id="languageSwitched" tr="Language Changed"/>
 		<Res id="success" tr="Success"/>
+		<Res id="successfulExport" tr="Transactions are exported to 'Transactions.xml' successfully"/>
 		<Res id="welcome" tr="Welcome "/>
 		<Res id="welcomeBack" tr="Welcome back "/>
 		<Res id="overview" tr="Overview"/>
@@ -31,5 +32,8 @@
 		<Res id="currency" tr="Currency"/>
 		<Res id="transactionHistory" tr="Transaction History"/>
 		<Res id="id" tr="ID"/>
+		<Res id="export" tr="Export to XML"/>
+		<Res id="delete" tr="Delete"/>
+
 	</Translations>
 </DevRes>
