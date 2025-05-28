@@ -54,3 +54,12 @@ const std::vector<td::String> ComponentUtils::getIncomes() {
     }
     return incomes;
 }
+
+const std::vector<td::String> ComponentUtils::getCategoriesTypes() {
+    return {"INCOME", "EXPENSE"};
+}
+
+const std::vector<std::vector<td::String> > ComponentUtils::getCategories() {
+    return {getIncomes(), getExpenses()};
+}
+

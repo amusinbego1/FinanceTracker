@@ -32,7 +32,7 @@ public:
 private:
     static const char * INSERT_TRANSACTION_SQL;
     static const char * FIND_TRANSACTIONS_BY_USER_SQL;
-    static const char * FIND_TRANSACTIONS_BY_USER_SQL2;
+    static const char * FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL;
     static const char * DELETE_TRANSACTIONS_BY_ID_SQL;
 
     TransactionRepository() = default;

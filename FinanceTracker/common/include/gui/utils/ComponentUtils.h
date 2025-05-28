@@ -22,6 +22,8 @@ public:
     static void openWindow(gui::Window* parentWindow, gui::Window* window);
     static const std::vector<td::String> getExpenses();
     static const std::vector<td::String> getIncomes();
+    static const std::vector<td::String> getCategoriesTypes();
+    static const std::vector<std::vector<td::String>> getCategories();
 };
 
 #endif //COMPONENTSTYLE_H

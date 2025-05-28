@@ -18,11 +18,13 @@
 #include <gui/DateEdit.h>
 #include <gui/TableEdit.h>
 #include <gui/View.h>
+#include <repository/CategoryRepository.h>
 
 class MainView : public gui::View
 {
-User _user;
-TransactionService& _transactionService;;
+    User _user;
+    TransactionService& _transactionService;
+    CategoryRepository& _categoryRepository;
 
     void setStyles();
     void arrangeElements();
@@ -42,13 +44,14 @@ TransactionService& _transactionService;;
     void initComboBoxes();
     void onChangeCategoryComboBox();
 
-    void initTable();
+    void initTable(bool shouldAddHeaders = true);
+    void reloadTable();
 
     void changeGraphToBalance();
     void changeGraphToIncome();
     void changeGraphToExpense();
-    void handleCancelButton();
-    void handleSaveButton();
+    bool handleCancelButton();
+    bool handleSaveButton();
 
     const char* formatDecimal2ToString(const td::Decimal2& number);
 protected:
@@ -66,8 +69,8 @@ protected:
     gui::Label _lblAddNewTransaction;
 
     gui::DateEdit _dateEdit;
-    gui::ComboBox _cbCategory;
     gui::ComboBox _cbType;
+    gui::ComboBox _cbCategory;
     gui::NumericEdit _neAmount;
 
     gui::Button _btnCancel;

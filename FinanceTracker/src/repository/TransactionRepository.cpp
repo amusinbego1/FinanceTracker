@@ -34,7 +34,7 @@ const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_SQL = "SELECT "
         "ON (cat.id = tr.category_id) "
         "WHERE user_id = ?";
 
-const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_SQL2 = "SELECT "
+const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL = "SELECT "
         "tr.id, "
         "cat.name cat_name, "
         "cat.type cat_type, "
@@ -118,7 +118,7 @@ std::vector<Transaction> TransactionRepository::findTransactionsByUser(const Use
 dp::IDataSetPtr& TransactionRepository::findTransactionsByUserIDataSetPtr(const User &user) {
 
 
-    _dataSetPtr = _databasePtr->createDataSet(FIND_TRANSACTIONS_BY_USER_SQL2, dp::IDataSet::Execution::EX_MULT);
+    _dataSetPtr = _databasePtr->createDataSet(FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL, dp::IDataSet::Execution::EX_MULT);
 
     td::Variant b_user_id(td::int4);
     td::Variant c_id(td::int4);
