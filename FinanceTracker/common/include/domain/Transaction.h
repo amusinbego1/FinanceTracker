@@ -9,7 +9,7 @@
 #include "Category.h"
 
 struct Transaction {
-    td::UINT4 id;
+    td::INT4 id;
     User user;                         // full User object instead of just userId
     Category category;                 // full Category object instead of categoryId
     td::Decimal2 amount = 0.0;

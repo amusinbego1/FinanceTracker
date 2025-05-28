@@ -97,12 +97,11 @@ void MainView::initComboBoxes() {
     _cbCategory.selectIndex(0);
 }
 
-void MainView::initTable(bool shouldAddHeaders) {
+void MainView::initTable() {
     _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
 
-    if (shouldAddHeaders) {
         gui::Columns visCols(_tblTransactionHistory.allocBindColumns(6));
-        visCols << gui::ThSep::DoNotShowThSep
+        visCols
         << gui::Header(0, tr("id"), tr("id"), 100)
         << td::Date::Format::ShortY4 << gui::Header(5, tr("date"), tr("date"),150)
         << gui::Header(2, tr("type"), tr("type"), 100, td::HAlignment::Right)
@@ -110,9 +109,7 @@ void MainView::initTable(bool shouldAddHeaders) {
         << gui::Header(3, tr("amount"), tr("amount"), 100, td::HAlignment::Right)
         << gui::Header(4, tr("currency"), tr("currency"), 100, td::HAlignment::Left);
         _tblTransactionHistory.init(_dataSetPtr);
-    }
-    else
-        _tblTransactionHistory.reload();
+        _tblTransactionHistory.selectRow(0);
 }
 
 void MainView::onChangeCategoryComboBox() {
@@ -269,25 +266,25 @@ bool MainView::handleCancelButton() {
 
 bool MainView::handleSaveButton() {
     //TODO: make a category service for this stuff
-    td::Variant categoryNameVar, categoryTypeVar, amountVar = _neAmount.getValue();
-    _cbType.getValue(categoryTypeVar);
-    _cbCategory.getValue(categoryNameVar);
-
-    td::Decimal2 amount;
-    td::UINT4 categoryName, categoryType;
-    td::Date date = _dateEdit.getValue();
-
-    amountVar.getValue(amount);
-    categoryNameVar.getValue(categoryName);
-    categoryTypeVar.getValue(categoryType);
-
-
-    Category category = _categoryRepository.findCategoryByNameAndType(
-                    ComponentUtils::getCategories()[categoryType][categoryName],
-                    from_string(ComponentUtils::getCategoriesTypes()[categoryType].c_str())
-                ).value();
-
-    _transactionService.addNewTransaction(Transaction{0, _user, category, amount, "BAM", date, td::String()});
+    // td::Variant categoryNameVar, categoryTypeVar, amountVar = _neAmount.getValue();
+    // _cbType.getValue(categoryTypeVar);
+    // _cbCategory.getValue(categoryNameVar);
+    //
+    // td::Decimal2 amount;
+    // td::INT4 categoryName, categoryType;
+    // td::Date date = _dateEdit.getValue();
+    //
+    // amountVar.getValue(amount);
+    // categoryNameVar.getValue(categoryName);
+    // categoryTypeVar.getValue(categoryType);
+    //
+    //
+    // Category category = _categoryRepository.findCategoryByNameAndType(
+    //                 ComponentUtils::getCategories()[categoryType][categoryName],
+    //                 from_string(ComponentUtils::getCategoriesTypes()[categoryType].c_str())
+    //             ).value();
+    //
+    // _transactionService.addNewTransaction(Transaction{0, _user, category, amount, "BAM", date, td::String()});
 
     reloadTable();
     return true;
@@ -296,11 +293,18 @@ bool MainView::handleSaveButton() {
 
 void MainView::reloadTable() {
     // _tblTransactionHistory.clean();
+    // for (int i=0; i<_dataSetPtr->getNumberOfRows(); i++)
+    //     _dataSetPtr->removeRow(i);
+    // _tblTransactionHistory.beginUpdate();
     // _dataSetPtr->removeAll();
+    // _dataSetPtr->release();
+    _tblTransactionHistory.getDataSet()->removeAll();
+    // _tblTransactionHistory.clean();
+    _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
     _tblTransactionHistory.reload();
     // _dataSetPtr->release();
     // initTable(false);
-    _tblTransactionHistory.selectRow(0);
+    // _tblTransactionHistory.selectRow(0);
 }
 
 

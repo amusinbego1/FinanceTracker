@@ -44,8 +44,8 @@ std::map<td::String, td::Decimal2> TransactionService::getTotalExpensesByCategor
     return expensesByCategory;
 }
 
-std::map<td::UINT4, ServiceUtils::Summary> TransactionService::getMonthlyBreakdown(td::INT4 year) {
-    std::map<td::UINT4, ServiceUtils::Summary> monthlyData;
+std::map<td::INT4, ServiceUtils::Summary> TransactionService::getMonthlyBreakdown(td::INT4 year) {
+    std::map<td::INT4, ServiceUtils::Summary> monthlyData;
     const auto& transactions = cache_.findAllTransactions(user_);
 
     for (const auto& transaction : transactions) {
@@ -64,8 +64,8 @@ std::map<td::UINT4, ServiceUtils::Summary> TransactionService::getMonthlyBreakdo
 }
 
 
-std::map<td::UINT4, ServiceUtils::Summary> TransactionService::getDailyBreakdown(td::INT4 year, td::UINT4 month) {
-    std::map<td::UINT4, ServiceUtils::Summary> dailyData;
+std::map<td::INT4, ServiceUtils::Summary> TransactionService::getDailyBreakdown(td::INT4 year, td::INT4 month) {
+    std::map<td::INT4, ServiceUtils::Summary> dailyData;
     const auto& transactions = cache_.findAllTransactions(user_);
 
     for (const auto& transaction : transactions) {

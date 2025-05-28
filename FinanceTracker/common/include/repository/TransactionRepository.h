@@ -9,7 +9,7 @@
 
 class TransactionRepository: public BaseRepository{
 
-    static dp::IDataSetPtr _dataSetPtr;
+    dp::IDataSetPtr _dataSetPtr;
 
 public:
     static TransactionRepository& getInstance() {

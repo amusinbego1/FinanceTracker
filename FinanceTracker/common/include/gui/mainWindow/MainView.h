@@ -44,7 +44,7 @@ class MainView : public gui::View
     void initComboBoxes();
     void onChangeCategoryComboBox();
 
-    void initTable(bool shouldAddHeaders = true);
+    void initTable();
     void reloadTable();
 
     void changeGraphToBalance();

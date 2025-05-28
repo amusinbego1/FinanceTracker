@@ -29,7 +29,7 @@ public:
 
     };
 
-    static td::UINT4 getDaysInMonth(td::UINT4 year, td::UINT4 month);
+    static td::INT4 getDaysInMonth(td::INT4 year, td::INT4 month);
 };
 
 

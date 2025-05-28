@@ -45,8 +45,8 @@ public:
     }
     ServiceUtils::Summary getSummary();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
-    std::map<td::UINT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
-    std::map<td::UINT4, ServiceUtils::Summary> getDailyBreakdown(td::INT4 year, td::UINT4 month);
+    std::map<td::INT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
+    std::map<td::INT4, ServiceUtils::Summary> getDailyBreakdown(td::INT4 year, td::INT4 month);
     // -------------------------------
 
     const User& getUser() const {

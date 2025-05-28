@@ -4,7 +4,7 @@
 
 #include "utility/ServiceUtils.h"
 
-td::UINT4 ServiceUtils::getDaysInMonth(td::UINT4 year, td::UINT4 month){
+td::INT4 ServiceUtils::getDaysInMonth(td::INT4 year, td::INT4 month){
     if (month < 1 || month > 12) {
         throw std::invalid_argument("Month must be between 1 and 12.");
     }

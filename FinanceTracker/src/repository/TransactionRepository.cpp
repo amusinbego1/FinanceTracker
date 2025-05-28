@@ -48,13 +48,13 @@ const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL = 
 
 const char * TransactionRepository::DELETE_TRANSACTIONS_BY_ID_SQL = "DELETE FROM transactions WHERE id = ?";
 
-dp::IDataSetPtr TransactionRepository::_dataSetPtr;
+// dp::IDataSetPtr TransactionRepository::_dataSetPtr;
 
 void TransactionRepository::saveTransaction(const Transaction &transaction) {
     dp::IStatementPtr saveStatPtr(_databasePtr->createStatement(INSERT_TRANSACTION_SQL));
 
-    td::UINT4 b_user_id;
-    td::UINT4 b_category_id;
+    td::INT4 b_user_id;
+    td::INT4 b_category_id;
     td::Decimal2 b_amount;
     td::Variant b_currency(td::string8, td::nch, 3);
     td::Date b_date;
@@ -117,24 +117,17 @@ std::vector<Transaction> TransactionRepository::findTransactionsByUser(const Use
 
 dp::IDataSetPtr& TransactionRepository::findTransactionsByUserIDataSetPtr(const User &user) {
 
-
-    _dataSetPtr = _databasePtr->createDataSet(FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL, dp::IDataSet::Execution::EX_MULT);
+    _dataSetPtr = _databasePtr->createDataSet(FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL);
 
     td::Variant b_user_id(td::int4);
-    td::Variant c_id(td::int4);
-    td::Variant c_cat_name(td::string8);
-    td::Variant c_cat_type(td::string8);
-    td::Variant c_amount(td::decimal2);
-    td::Variant c_currency(td::string8);
-    td::Variant c_date(td::date);
 
     dp::DSColumns columns(_dataSetPtr->allocBindColumns(6));
-    columns << "id" << c_id
-            << "cat_name" << c_cat_name
-            << "cat_type" << c_cat_type
-            << "amount" << c_amount
-            << "currency" << c_currency
-            << "date" << c_date;
+    columns << "id" << td::int4
+            << "cat_name" << td::string8
+            << "cat_type" << td::string8
+            << "amount" << td::decimal2
+            << "currency" << td::string8
+            << "date" << td::date;
 
     dp::Params params(_dataSetPtr->allocParams());
     params << b_user_id;

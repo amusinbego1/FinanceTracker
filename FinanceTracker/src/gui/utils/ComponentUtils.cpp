@@ -30,8 +30,8 @@ void ComponentUtils::setLabelWarningStyle(gui::Control &label) {
 }
 
 void ComponentUtils::openWindow(gui::Window *parentWindow, gui::Window *window) {
-    parentWindow->close();
     window->keepOnTopOfParent();
+    // parentWindow->close();
     window->open();
 }
 

@@ -40,7 +40,7 @@ void UserRepository::saveUser(const User &user) {
 }
 
 std::optional<User> UserRepository::findUserByUsernameAndPassword(const td::String& username, const td::String& password) {
-    td::UINT4 user_id;
+    td::INT4 user_id;
     td::String encryptedPassword = encryptPassword(password);
 
     dp::IStatementPtr pStatPtr(_databasePtr->createStatement(FIND_USER_BY_USERNAME_AND_PASSWORD_SQL));

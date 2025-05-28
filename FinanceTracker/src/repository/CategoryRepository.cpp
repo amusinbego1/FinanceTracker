@@ -28,7 +28,7 @@ void CategoryRepository::saveCategory(const Category& category){
 }
 
 std::optional<Category> CategoryRepository::findCategoryByNameAndType(const td::String& name, const CategoryType& type) {
-    td::UINT4 category_id;
+    td::INT4 category_id;
 
     dp::IStatementPtr pStatPtr(_databasePtr->createStatement(FIND_CATEGORY_BY_NAME_AND_TYPE_SQL));
 

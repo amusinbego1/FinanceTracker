@@ -10,7 +10,7 @@
 
 struct User
 {
-    td::UINT4 id;
+    td::INT4 id;
     td::String username;
     td::String password;
 };

@@ -31,7 +31,7 @@ inline CategoryType from_string(const std::string& str) {
 }
 
 struct Category {
-    td::UINT4 id;
+    td::INT4 id;
     td::String name;
     CategoryType type;
 };
