@@ -23,7 +23,7 @@ bool MainWindow::onActionItem(gui::ActionItemDescriptor &aiDesc) {
 }
 
 MainWindow::MainWindow(User user)
-        : gui::Window(gui::Geometry(300, 100, 1300, 800)),
+        : gui::Window(gui::Geometry(300, 5, 1400, 1000)),
          _user(user),
          _toolBar(user),
          _mainView(user),

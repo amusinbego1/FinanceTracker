@@ -22,7 +22,7 @@ MainView::MainView(User user):
 
 // GRAPH
     _lblGraph(tr("balance")),
-    _graphReplacement("Line chart replacement"),
+    _graph(user),
 
 // INPUT
     _lblAddNewTransaction(tr("addNewTransaction")),
@@ -83,7 +83,6 @@ void MainView::setStyles() {
     ComponentUtils::setOverviewButtonStyle(_btnExpense);
     ComponentUtils::setTitleStyle(_lblOverview);
     ComponentUtils::setTitleStyle(_lblGraph);
-    ComponentUtils::setTitleStyle(_graphReplacement);
     ComponentUtils::setTitleStyle(_lblAddNewTransaction);
     ComponentUtils::setTitleStyle(_lblExpenseByCategory);
     ComponentUtils::setTitleStyle(_donutReplacement);
@@ -149,7 +148,7 @@ void MainView::arrangeOverviewLayout() {
 
 void MainView::arrangeGraphLayout() {
     _vGraphLayout.append(_lblGraph, td::HAlignment::Left);
-    _vGraphLayout.append(_graphReplacement);
+    _vGraphLayout.append(_graph);
 }
 
 void MainView::arrangeNewTransactionLayout() {

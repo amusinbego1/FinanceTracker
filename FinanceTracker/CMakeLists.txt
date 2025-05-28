@@ -16,6 +16,9 @@ set(WORK_ROOT ${HOME_ROOT}/Work)
 include(${WORK_ROOT}/DevEnv/Common.cmake)
 include(${WORK_ROOT}/DevEnv/DataProvider.cmake)
 include(${WORK_ROOT}/DevEnv/natGUI.cmake)
+include(${WORK_ROOT}/DevEnv/GtkGL.cmake)
+include(${WORK_ROOT}/DevEnv/natGL.cmake)
+include(${WORK_ROOT}/DevEnv/natRpt.cmake)
 include(FinanceTracker.cmake)
 
 target_include_directories(${FINANCE_TRACKER_NAME}

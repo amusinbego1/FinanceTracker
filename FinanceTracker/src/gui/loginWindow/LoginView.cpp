@@ -23,6 +23,7 @@ LoginView::LoginView()
 
 void LoginView::setStyles() {
     ComponentUtils::setDefaultButtonStyle(_btnSignIn);
+    _btnSignIn.setAsDefault();
     ComponentUtils::setDefaultButtonStyle(_btnRegister);
     ComponentUtils::setLabelWarningStyle(_lblInvalidUserWarning);
 

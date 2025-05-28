@@ -20,6 +20,8 @@
 #include <gui/View.h>
 #include <repository/CategoryRepository.h>
 
+#include "gui/graph/Graph.h"
+
 class MainView : public gui::View
 {
     User _user;
@@ -66,7 +68,7 @@ protected:
 
     //Graph
     gui::Label _lblGraph;
-    gui::Label _graphReplacement;
+    Graph _graph;
 
     //Input
     gui::Label _lblAddNewTransaction;
