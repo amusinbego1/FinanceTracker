@@ -61,22 +61,29 @@ class ExpensePie : public gui::Canvas {
         }
     }
 
-public:
-    ExpensePie(User user) : _transactionService(TransactionService::getInstance(user)), _categoryRepository(CategoryRepository::getInstance()) {
+    void drawPieData() {
         gui::Circle c(radius, radius, radius);
-        expenseNames = _categoryRepository.findAllExpenses();
         expenses = _transactionService.getTotalExpensesByCategoryName();
         totalExpense = _transactionService.getSummary().getExpense();
-
-
         _pies[0].createPie(c, 0, calculateAngle(0), 2);
+
+        double acc = 0;
+        for(int i=0; i<10; i++) {
+            _pies[i].createPie(c, acc, acc + calculateAngle(i), 2);
+            acc += calculateAngle(i);
+            _pies[i].drawFill(_colors[i]);
+        }
+
+    }
+
+public:
+    ExpensePie(User user) : _transactionService(TransactionService::getInstance(user)), _categoryRepository(CategoryRepository::getInstance()) {
+        expenseNames = _categoryRepository.findAllExpenses();
+
         _colorRepr[0].createCircle(gui::Circle(2*radius + small_radius + 15,  2*small_radius + 2, small_radius));
         _colorLabels[0] = expenseNames[0].name;
 
-        double acc = calculateAngle(0);
         for(int i=1; i<10; i++) {
-            _pies[i].createPie(c, acc, acc + calculateAngle(i), 2);
-            acc += calculateAngle(i);
             _colorRepr[i].createCircle(gui::Circle(2*radius + small_radius + 15,  (2*small_radius + 2)*(i+1), small_radius));
             _colorLabels[i] = expenseNames[i].name;
         }
@@ -85,10 +92,15 @@ public:
 
     void onDraw(const gui::Rect &rect) override {
         for(int i=0; i<10; i++) {
-            _pies[i].drawFill(_colors[i]);
             _colorRepr[i].drawFill(_colors[i]);
             _colorLabels[i].draw(gui::Point(2*radius + 2*small_radius + 20, (2*small_radius + 2)*i + 3), gui::Font::ID::SystemSmaller, td::ColorID::SysText);
         }
+        drawPieData();
+    }
+
+
+    void updateData() {
+        reDraw();
     }
 };
 

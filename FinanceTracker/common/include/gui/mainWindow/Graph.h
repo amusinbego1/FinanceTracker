@@ -46,6 +46,20 @@ class Graph : public gui::Canvas {
         return cstr;
     }
 
+    void drawGraphData() {
+        td::Date date; date.now();
+        _breakdown = _transactionService.getMonthlyBreakdown(date.getYear());
+        double maxData = getMaxOfData();
+
+        for (int i = 0; i < 12; i++) {
+            if (i < 5) {
+                _labels[i] = formatDecimal2ToString(maxData - maxData / 4 * (i));
+                _labels[i].draw(gui::Point(0, i * _step), gui::Font::ID::SystemSmaller, td::ColorID::DodgerBlue);
+            }
+            points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData)), _radius);
+        }
+    }
+
 public:
     Graph(User user): _transactionService(TransactionService::getInstance(user)), _dataType("Balance") {
         _xAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, 0), gui::Point(_x_begin, _y_max)}, 2);
@@ -77,19 +91,11 @@ public:
         reDraw();
     }
 
-    void drawGraphData() {
-        td::Date date; date.now();
-        _breakdown = _transactionService.getMonthlyBreakdown(date.getYear());
-        double maxData = getMaxOfData();
-
-        for (int i = 0; i < 12; i++) {
-            if (i < 5) {
-                _labels[i] = formatDecimal2ToString(maxData - maxData / 4 * (i));
-                _labels[i].draw(gui::Point(0, i * _step), gui::Font::ID::SystemSmaller, td::ColorID::DodgerBlue);
-            }
-            points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData)), _radius);
-        }
+    void updateData() {
+        reDraw();
     }
+
+
 };
 
 #endif //GRAPH_H
