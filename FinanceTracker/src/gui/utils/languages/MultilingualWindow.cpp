@@ -10,6 +10,8 @@ Language MultilingualWindow::_currentLanguage = Language::EN;
 
 bool MultilingualWindow::changeLanguage(){
     // TODO: nagodi da se promijeni jezik
+        // koristi Dialog za upit o restartovanju applikacije
+
     _instance->getApplication()->setLanguage(toString(++_currentLanguage));
     _instance->showInfo(gui::tr("success"), gui::tr("languageSwitched"));
     return true;

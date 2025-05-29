@@ -65,13 +65,12 @@ class ExpensePie : public gui::Canvas {
         gui::Circle c(radius, radius, radius);
         expenses = _transactionService.getTotalExpensesByCategoryName();
         totalExpense = _transactionService.getSummary().getExpense();
-        _pies[0].createPie(c, 0, calculateAngle(0), 2);
 
         double acc = 0;
         for(int i=0; i<10; i++) {
-            _pies[i].createPie(c, acc, acc + calculateAngle(i), 2);
+            _pies[i].createPie(c, acc, acc + calculateAngle(i), 1.5);
             acc += calculateAngle(i);
-            _pies[i].drawFill(_colors[i]);
+            _pies[i].drawFillAndWire(_colors[i], td::ColorID::Black);
         }
 
     }
