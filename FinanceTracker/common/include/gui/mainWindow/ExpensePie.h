@@ -87,7 +87,7 @@ public:
         for(int i=0; i<10; i++) {
             _pies[i].drawFill(_colors[i]);
             _colorRepr[i].drawFill(_colors[i]);
-            _colorLabels[i].draw(gui::Point(2*radius + 2*small_radius + 20, (2*small_radius + 2)*i + 3), gui::Font::ID::SystemSmaller, td::ColorID::DodgerBlue);
+            _colorLabels[i].draw(gui::Point(2*radius + 2*small_radius + 20, (2*small_radius + 2)*i + 3), gui::Font::ID::SystemSmaller, td::ColorID::SysText);
         }
     }
 };

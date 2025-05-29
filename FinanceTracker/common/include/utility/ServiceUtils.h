@@ -29,6 +29,18 @@ public:
 
     };
 
+    static double getBalanceWrapper(const ServiceUtils::Summary& s) {
+        return s.getBalance().getAsFloat();
+    }
+
+    static double getIncomeWrapper(const ServiceUtils::Summary& s) {
+        return s.getIncome().getAsFloat();
+    }
+
+    static double getExpenseWrapper(const ServiceUtils::Summary& s) {
+        return s.getExpense().getAsFloat();
+    }
+
     static td::INT4 getDaysInMonth(td::INT4 year, td::INT4 month);
 };
 

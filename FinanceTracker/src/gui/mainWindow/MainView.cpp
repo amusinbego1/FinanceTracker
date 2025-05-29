@@ -268,17 +268,17 @@ bool MainView::onChangedSelection(gui::ComboBox* pCmb) {
 
 void MainView::changeGraphToBalance(){
     _lblGraph.setTitle(tr("balance"));
-    //TODO: implement graph change to balance
+    _graph.changeDataType("Balance");
 }
 
 void MainView::changeGraphToIncome(){
     _lblGraph.setTitle(tr("income"));
-    //TODO: implement graph change to income
+    _graph.changeDataType("Income");
 }
 
 void MainView::changeGraphToExpense(){
     _lblGraph.setTitle(tr("expense"));
-    //TODO: implement graph change to expense
+    _graph.changeDataType("Expense");
 }
 
 bool MainView::handleCancelButton() {
