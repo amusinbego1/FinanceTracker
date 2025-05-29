@@ -8,7 +8,6 @@
 #include <gui/Canvas.h>
 #include <gui/Shape.h>
 #include <gui/DrawableString.h>
-#include <algorithm>
 
 class Graph : public gui::Canvas{
     const int _y_max = 160, _x_max = 480 + 60, _step = 40, _radius = 4, _x_begin = 60;

@@ -19,8 +19,9 @@
 #include <gui/TableEdit.h>
 #include <gui/View.h>
 #include <repository/CategoryRepository.h>
+#include "Graph.h"
+#include "ExpensePie.h"
 
-#include "gui/graph/Graph.h"
 
 class MainView : public gui::View
 {
@@ -83,7 +84,7 @@ protected:
 
     //Donut
     gui::Label _lblExpenseByCategory;
-    gui::Label _donutReplacement;
+    ExpensePie _pie;
 
     //Transaction History
     gui::Label _lblTransactionHistory;

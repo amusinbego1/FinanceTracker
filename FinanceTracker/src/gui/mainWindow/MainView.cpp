@@ -37,7 +37,7 @@ MainView::MainView(User user):
 
 // DONUT
     _lblExpenseByCategory(tr("expenseByCategory")),
-    _donutReplacement("Donut chart replacement"),
+    _pie(user),
 
 // TRANSACTION HISTORY
     _lblTransactionHistory(tr("transactionHistory")),
@@ -85,7 +85,6 @@ void MainView::setStyles() {
     ComponentUtils::setTitleStyle(_lblGraph);
     ComponentUtils::setTitleStyle(_lblAddNewTransaction);
     ComponentUtils::setTitleStyle(_lblExpenseByCategory);
-    ComponentUtils::setTitleStyle(_donutReplacement);
     ComponentUtils::setTitleStyle(_lblTransactionHistory);
     ComponentUtils::setDefaultButtonStyle(_btnSave);
     _btnSave.setAsDefault();
@@ -152,6 +151,7 @@ void MainView::arrangeGraphLayout() {
 }
 
 void MainView::arrangeNewTransactionLayout() {
+    _hInputLayout.setSize(gui::Size(300, 100));
     arrangeInputLayout();
     arrangeButtonLayout();
     _vNewTransactionLayout.append(_lblAddNewTransaction, td::HAlignment::Left);
@@ -160,6 +160,10 @@ void MainView::arrangeNewTransactionLayout() {
 }
 
 void MainView::arrangeInputLayout() {
+    _dateEdit.setSize(gui::Size(30, 20));
+    _cbType.setSize(gui::Size(70, 20));
+    _cbCategory.setSize(gui::Size(70, 20));
+    _neAmount.setSize(gui::Size(30, 20));
     _hInputLayout.append(_dateEdit);
     _hInputLayout.append(_cbType);
     _hInputLayout.append(_cbCategory);
@@ -169,14 +173,14 @@ void MainView::arrangeInputLayout() {
 void MainView::arrangeButtonLayout() {
     _hButtonLayout.appendSpacer();
     _hButtonLayout.append(_btnCancel);
-    _hButtonLayout.appendSpacer(3);
+    _hButtonLayout.appendSpacer(2);
     _hButtonLayout.append(_btnSave);
     _hButtonLayout.appendSpacer();
 }
 
 void MainView::arrangeDonutLayout() {
     _vDonutLayout.append(_lblExpenseByCategory, td::HAlignment::Left);
-    _vDonutLayout.append(_donutReplacement);
+    _vDonutLayout.append(_pie);
 }
 
 
@@ -189,7 +193,7 @@ void MainView::arrangeFirstRowLayout(){
 
 void MainView::arrangeSecondRowLayout() {
     _hSecondRowLayout.appendLayout(_vNewTransactionLayout);
-    _hSecondRowLayout.appendSpacer(5);
+    _hSecondRowLayout.appendSpacer(2);
     _hSecondRowLayout.appendLayout(_vDonutLayout);
 
 }
@@ -221,7 +225,7 @@ void MainView::arrangeExportButtonLayout() {
 
 
 void MainView::arrangeVerticalCentralLayout(){
-    _vCentralMainLayout.appendSpacer(2);
+    _vCentralMainLayout.appendSpacer(1);
     _vCentralMainLayout.appendLayout(_hFirstRowLayout);
     _vCentralMainLayout.appendSpacer(1);
     _vCentralMainLayout.appendLayout(_hSecondRowLayout);
