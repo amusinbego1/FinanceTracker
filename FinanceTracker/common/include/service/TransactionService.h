@@ -29,20 +29,11 @@ public:
     TransactionService& operator=(TransactionService&&) = delete;
 
     // ----------Interface-----------
-    void addNewTransaction(const Transaction& transaction) {
-        TransactionRepository::getInstance().saveTransaction(transaction);
-        cache_.invalidate();
-    }
-    void deleteTransaction(const Transaction& transaction) {
-        TransactionRepository::getInstance().deleteTransaction(transaction);
-        cache_.invalidate();
-    }
+    void addNewTransaction(const Transaction& transaction);
+    void deleteTransactionByID(const Transaction& transaction);
     const std::vector<Transaction>& getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     dp::IDataSetPtr& findTransactionsIDataSetPtr();
-    td::String writeTransactionsToXml() {
-        xml_writer_.write(getAllTransactions(TransactionSortField::NoSort));
-        return XML_PATH;
-    }
+    td::String writeTransactionsToXml();
     ServiceUtils::Summary getSummary();
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     std::map<td::INT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);

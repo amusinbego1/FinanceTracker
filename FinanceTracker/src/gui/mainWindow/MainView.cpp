@@ -312,9 +312,10 @@ bool MainView::handleSaveButton() {
 
 
 void MainView::reloadTable() {
-    _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
+    // TODO: to fix
+    // _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
     // _tblTransactionHistory.clean();
-    _tblTransactionHistory.reload();
+    // _tblTransactionHistory.reload();
 }
 
 bool MainView::handleDeleteButton() {
@@ -339,6 +340,7 @@ void MainView::reloadView() {
     _btnBalance.setTitle(getBtnBalanceTitle());
     _btnIncome.setTitle(getBtnIncomeTitle());
     _btnExpense.setTitle(getBtnExpenseTitle());
+    reloadTable();
     handleCancelButton();
 }
 

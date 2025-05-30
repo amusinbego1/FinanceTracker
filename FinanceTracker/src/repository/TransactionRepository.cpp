@@ -137,7 +137,7 @@ dp::IDataSetPtr& TransactionRepository::findTransactionsByUserIDataSetPtr(const 
     return _dataSetPtr;
 }
 
-void TransactionRepository::deleteTransaction(const Transaction & transaction) {
+void TransactionRepository::deleteTransactionByID(const Transaction & transaction) {
     dp::IStatementPtr deletePtr(_databasePtr->createStatement(DELETE_TRANSACTIONS_BY_ID_SQL));
 
     td::Variant b_id(td::int4);
