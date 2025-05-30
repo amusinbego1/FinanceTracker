@@ -47,6 +47,7 @@ public:
     std::map<td::String, td::Decimal2> getTotalExpensesByCategoryName();
     std::map<td::INT4, ServiceUtils::Summary> getMonthlyBreakdown(td::INT4 year);
     std::map<td::INT4, ServiceUtils::Summary> getDailyBreakdown(td::INT4 year, td::INT4 month);
+    void invalidateCache();
     // -------------------------------
 
     const User& getUser() const {

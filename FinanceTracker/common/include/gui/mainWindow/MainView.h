@@ -45,6 +45,10 @@ class MainView : public gui::View
     void arrangeVerticalCentralLayout();
     void arrangeMainLayout();
 
+    td::String getBtnBalanceTitle();
+    td::String getBtnIncomeTitle();
+    td::String getBtnExpenseTitle();
+
     void initComboBoxes();
     void onChangeCategoryComboBox();
 
@@ -59,7 +63,8 @@ class MainView : public gui::View
     bool handleDeleteButton();
     bool handleExportButton();
 
-    const char* formatDecimal2ToString(const td::Decimal2& number);
+    void reloadView();
+
 protected:
     //Overview
     gui::Label _lblOverview;

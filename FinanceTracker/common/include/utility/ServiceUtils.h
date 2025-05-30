@@ -44,6 +44,13 @@ public:
     static td::INT4 getDaysInMonth(td::INT4 year, td::INT4 month);
 };
 
+inline const char* formatDecimal2ToString(const td::Decimal2& number) {
+    double value = number.getAsFloat();
+    char buffer[32];
+    sprintf_s(buffer, sizeof(buffer), "%.2f", value);
+    const char* cstr = buffer;
+    return cstr;
+}
 
 
 #endif //SERVICEUTILS_H

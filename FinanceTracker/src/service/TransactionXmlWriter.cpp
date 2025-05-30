@@ -4,6 +4,8 @@
 
 #include "service/TransactionXmlWriter.h"
 
+#include <utility/ServiceUtils.h>
+
 void TransactionXmlWriter::write(const std::vector<Transaction>& transactions) {
     writer_.startDocument();
         writer_.startNode("Transactions");
@@ -21,12 +23,4 @@ void TransactionXmlWriter::writeTransaction(const Transaction& transaction) {
         writer_.attribute("currency", transaction.currency);
         writer_.nodeString(formatDecimal2ToString(transaction.amount));
     writer_.endNode();
-}
-
-const char* TransactionXmlWriter::formatDecimal2ToString(const td::Decimal2& number) {
-    double value = number.getAsFloat();
-    char buffer[32];
-    sprintf_s(buffer, sizeof(buffer), "%.2f", value);
-    const char* cstr = buffer;
-    return cstr;
 }

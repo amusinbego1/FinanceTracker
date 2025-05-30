@@ -16,9 +16,9 @@ MainView::MainView(User user):
     _categoryRepository(CategoryRepository::getInstance()),
 // OVERVIEW
     _lblOverview(tr("overview")),
-    _btnBalance((tr("balance") + ":   " + formatDecimal2ToString(_transactionService.getSummary().getBalance())).strVal()),
-    _btnIncome((tr("income") + ":    " + formatDecimal2ToString(_transactionService.getSummary().getIncome())).strVal()),
-    _btnExpense((tr("expense") + ":   " + formatDecimal2ToString(_transactionService.getSummary().getExpense())).strVal()),
+    _btnBalance(getBtnBalanceTitle()),
+    _btnIncome(getBtnIncomeTitle()),
+    _btnExpense(getBtnExpenseTitle()),
 
 // GRAPH
     _lblGraph(tr("balance")),
@@ -69,13 +69,6 @@ MainView::MainView(User user):
     initTable();
 }
 
-const char* MainView::formatDecimal2ToString(const td::Decimal2& number) {
-    double value = number.getAsFloat();
-    char buffer[32];
-    sprintf_s(buffer, sizeof(buffer), "%.2f", value);
-    const char* cstr = buffer;
-    return cstr;
-}
 
 void MainView::setStyles() {
     ComponentUtils::setOverviewButtonStyle(_btnBalance);
@@ -312,19 +305,22 @@ bool MainView::handleSaveButton() {
     //
     // _transactionService.addNewTransaction(Transaction{0, _user, category, amount, "BAM", date, td::String()});
 
-    reloadTable();
+    // reloadTable();
+    reloadView();
     return true;
 }
 
 
 void MainView::reloadTable() {
     _dataSetPtr = _transactionService.findTransactionsIDataSetPtr();
+    // _tblTransactionHistory.clean();
     _tblTransactionHistory.reload();
 }
 
 bool MainView::handleDeleteButton() {
     //TODO: implement delete functionality
     std::cout << "Delete Butoon Pressed" << td::endl;
+    reloadView();
     return true;
 }
 
@@ -335,6 +331,28 @@ bool MainView::handleExportButton() {
 }
 
 
+void MainView::reloadView() {
+    //TODO: cache invalidation wont be neccessary, you can remove it from here and from TransactionService
+    _transactionService.invalidateCache();
+    _graph.updateData();
+    _pie.updateData();
+    _btnBalance.setTitle(getBtnBalanceTitle());
+    _btnIncome.setTitle(getBtnIncomeTitle());
+    _btnExpense.setTitle(getBtnExpenseTitle());
+    handleCancelButton();
+}
+
+td::String MainView::getBtnBalanceTitle(){
+    return (tr("balance") + ":   " + formatDecimal2ToString(_transactionService.getSummary().getBalance())).strVal();
+}
+
+td::String MainView::getBtnIncomeTitle(){
+    return (tr("income") + ":    " + formatDecimal2ToString(_transactionService.getSummary().getIncome())).strVal();
+}
+
+td::String MainView::getBtnExpenseTitle(){
+    return (tr("expense") + ":   " + formatDecimal2ToString(_transactionService.getSummary().getExpense())).strVal();
+}
 
 
 

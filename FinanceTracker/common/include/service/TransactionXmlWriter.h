@@ -18,7 +18,6 @@ public:
 private:
     xml::Writer writer_;
     void writeTransaction(const Transaction&);
-    const char* formatDecimal2ToString(const td::Decimal2& number);
 };
 
 #endif //TRANSACTIONXMLWRITER_H

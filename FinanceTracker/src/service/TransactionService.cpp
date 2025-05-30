@@ -82,3 +82,7 @@ std::map<td::INT4, ServiceUtils::Summary> TransactionService::getDailyBreakdown(
 
     return dailyData;
 }
+
+void TransactionService::invalidateCache() {
+    cache_.invalidate();
+}

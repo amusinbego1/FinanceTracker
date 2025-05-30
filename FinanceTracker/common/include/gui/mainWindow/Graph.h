@@ -8,6 +8,7 @@
 #include <gui/Canvas.h>
 #include <gui/Shape.h>
 #include <gui/DrawableString.h>
+#include <utility/ServiceUtils.h>
 
 class Graph : public gui::Canvas {
     const int _y_max = 160, _x_max = 480 + 60, _step = 40, _radius = 4, _x_begin = 60;
@@ -36,14 +37,6 @@ class Graph : public gui::Canvas {
             if (getData[_dataType](_breakdown[i]) > max)
                 max = getData[_dataType](_breakdown[i]);
         return max + _radius;
-    }
-
-    const char *formatDecimal2ToString(const td::Decimal2 &number) {
-        double value = number.getAsFloat();
-        char buffer[32];
-        sprintf_s(buffer, sizeof(buffer), "%.2f", value);
-        const char *cstr = buffer;
-        return cstr;
     }
 
     void drawGraphData() {
