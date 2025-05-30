@@ -108,7 +108,6 @@ bool RegisterView::handleClickOnRegisterButton() {
 }
 
 void RegisterView::showInfoForValidCredentials(const td::String& username) {
-    // TODO: resize this info window
     showInfo(tr("success"), (tr("welcome") + username).strVal());
 }
 

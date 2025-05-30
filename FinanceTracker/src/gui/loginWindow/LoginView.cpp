@@ -86,7 +86,6 @@ bool LoginView::handleClickOnSignInButton() {
 }
 
 void LoginView::showInfoForValidCredentials(const User &loggedInUser) {
-    // TODO: resize this info window
     showInfo(tr("success"), (tr("welcomeBack") + loggedInUser.username).strVal());
 }
 

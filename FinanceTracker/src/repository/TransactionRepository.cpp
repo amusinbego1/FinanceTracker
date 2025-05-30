@@ -48,8 +48,6 @@ const char *TransactionRepository::FIND_TRANSACTIONS_BY_USER_WITH_DATASET_SQL = 
 
 const char * TransactionRepository::DELETE_TRANSACTIONS_BY_ID_SQL = "DELETE FROM transactions WHERE id = ?";
 
-// dp::IDataSetPtr TransactionRepository::_dataSetPtr;
-
 void TransactionRepository::saveTransaction(const Transaction &transaction) {
     dp::IStatementPtr saveStatPtr(_databasePtr->createStatement(INSERT_TRANSACTION_SQL));
 

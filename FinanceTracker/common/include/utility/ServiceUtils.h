@@ -4,6 +4,7 @@
 
 #ifndef SERVICEUTILS_H
 #define SERVICEUTILS_H
+#include <td/ColorID.h>
 #include <td/Decimal.h>
 
 class ServiceUtils{
@@ -23,9 +24,9 @@ public:
             return *this;
         }
 
-        td::Decimal2 getIncome() const {return income_;}
-        td::Decimal2 getExpense() const {return expense_;}
-        td::Decimal2 getBalance() const {return income_ - expense_;}
+        [[nodiscard]] td::Decimal2 getIncome() const {return income_;}
+        [[nodiscard]] td::Decimal2 getExpense() const {return expense_;}
+        [[nodiscard]] td::Decimal2 getBalance() const {return income_ - expense_;}
 
     };
 
@@ -51,6 +52,24 @@ inline const char* formatDecimal2ToString(const td::Decimal2& number) {
     const char* cstr = buffer;
     return cstr;
 }
+
+inline const char* to_string(td::ColorID color_id) {
+    switch (color_id) {
+        case td::ColorID::Tomato: return "Tomato";
+        case td::ColorID::Gold: return "Gold";
+        case td::ColorID::MediumSeaGreen: return "MediumSeaGreen";
+        case td::ColorID::DodgerBlue: return "DodgerBlue";
+        case td::ColorID::Orchid: return "Orchid";
+        case td::ColorID::SandyBrown: return "SandyBrown";
+        case td::ColorID::SlateBlue: return "SlateBlue";
+        case td::ColorID::MediumTurquoise: return "MediumTurquoise";
+        case td::ColorID::HotPink: return "HotPink";
+        case td::ColorID::DarkOliveGreen: return "DarkOliveGreen";
+        default: return "Unknown";
+    }
+}
+
+
 
 
 #endif //SERVICEUTILS_H
