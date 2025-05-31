@@ -26,7 +26,7 @@ public:
     void saveTransaction(const Transaction&);
     std::vector<Transaction> findTransactionsByUser(const User&);
     dp::IDataSetPtr& findTransactionsByUserIDataSetPtr (const User&);
-    void deleteTransactionByID(const Transaction&);
+    void deleteTransactionByID(const td::Variant & transaction_id);
     //
 
 private:

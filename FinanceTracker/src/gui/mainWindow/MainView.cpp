@@ -319,8 +319,10 @@ void MainView::reloadTable() {
 }
 
 bool MainView::handleDeleteButton() {
-    //TODO: implement delete functionality
-    std::cout << "Delete Butoon Pressed" << td::endl;
+    td::Variant transaction_id;
+    auto&row = _dataSetPtr->getRow(_tblTransactionHistory.getFirstSelectedRow());
+    transaction_id = row[0];
+    _transactionService.deleteTransactionByID(transaction_id);
     reloadView();
     return true;
 }

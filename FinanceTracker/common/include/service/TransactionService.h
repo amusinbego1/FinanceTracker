@@ -30,7 +30,7 @@ public:
 
     // ----------Interface-----------
     void addNewTransaction(const Transaction& transaction);
-    void deleteTransactionByID(const Transaction& transaction);
+    void deleteTransactionByID(const td::Variant & transaction_id);
     const std::vector<Transaction>& getAllTransactions(TransactionSortField sortBy = TransactionSortField::DateDesc);
     dp::IDataSetPtr& findTransactionsIDataSetPtr();
     td::String writeTransactionsToXml();

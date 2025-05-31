@@ -93,8 +93,8 @@ void TransactionService::addNewTransaction(const Transaction &transaction) {
     cache_.invalidate();
 }
 
-void TransactionService::deleteTransactionByID(const Transaction &transaction)  {
-    TransactionRepository::getInstance().deleteTransactionByID(transaction);
+void TransactionService::deleteTransactionByID(const td::Variant & transaction_id)  {
+    TransactionRepository::getInstance().deleteTransactionByID(transaction_id);
     cache_.invalidate();
 }
 
