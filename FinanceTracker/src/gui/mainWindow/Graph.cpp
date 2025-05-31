@@ -23,29 +23,29 @@ void Graph::drawGraphData() {
     for (int i = 0; i < 12; i++) {
         if (i < 5) {
             _labels[i] = formatDecimal2ToString(maxData - maxData / 4 * (i));
-            _labels[i].draw(gui::Point(0, i * _step), gui::Font::ID::SystemSmaller, td::ColorID::DodgerBlue);
+            _labels[i].draw(gui::Point(0, i * _step), gui::Font::ID::SystemSmaller, td::ColorID::SysText);
         }
-        points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData)), _radius);
+        points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_begin + _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData)), _radius);
     }
 }
 
 
 Graph::Graph(const User& user): _transactionService(TransactionService::getInstance(user)), _dataType("Balance") {
-    _xAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, 0), gui::Point(_x_begin, _y_max)}, 2);
-    _yAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, _y_max), gui::Point(_x_max, _y_max)}, 2);
+    _yAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, _y_begin), gui::Point(_x_begin, _y_begin + _y_max)}, 2);
+    _xAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, _y_max + _y_begin), gui::Point(_x_max, _y_begin + _y_max)}, 2);
     for (int i = 0; i < 5; i++) {
-        _dashes[i].createLines(new gui::Point[2]{gui::Point(_x_begin - _radius, i * _step), gui::Point(_x_begin + _radius, i * _step)}, 2);
+        _dashes[i].createLines(new gui::Point[2]{gui::Point(_x_begin - _radius, _y_begin + i * _step), gui::Point(_x_begin + _radius, _y_begin + i * _step)}, 2);
     }
 
 }
 
 void Graph::onDraw(const gui::Rect &rect)  {
-    _xAxis.drawWire(td::ColorID::Black, 2.5);
     _yAxis.drawWire(td::ColorID::Black, 2.5);
+    _xAxis.drawWire(td::ColorID::Black, 2.5);
     for (int i = 0; i < 12; i++) {
         if (i < 5)
             _dashes[i].drawWire(td::ColorID::Black, 4);
-        _months[i].draw(gui::Point(_x_begin + i * _step - 5, _y_max + 5), gui::Font::ID::SystemSmaller, td::ColorID::DodgerBlue);
+        _months[i].draw(gui::Point(_x_begin + i * _step - 5, _y_max + 5 + _y_begin), gui::Font::ID::SystemSmaller, td::ColorID::SysText);
     }
 
     drawGraphData();

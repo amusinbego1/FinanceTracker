@@ -60,6 +60,7 @@ class MainView : public gui::View
     void changeGraphToExpense();
     bool handleCancelButton();
     bool handleSaveButton();
+    void setCategoryDataFromIndexes(td::INT4& name, td::INT4& type);
     bool handleDeleteButton();
     bool handleExportButton();
 

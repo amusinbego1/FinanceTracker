@@ -176,8 +176,6 @@ void MainView::arrangeDonutLayout() {
     _vDonutLayout.append(_pie);
 }
 
-
-
 void MainView::arrangeFirstRowLayout(){
     _hFirstRowLayout.appendLayout(_vOverviewLayout);
     _hFirstRowLayout.appendSpacer();
@@ -188,7 +186,6 @@ void MainView::arrangeSecondRowLayout() {
     _hSecondRowLayout.appendLayout(_vNewTransactionLayout);
     _hSecondRowLayout.appendSpacer(2);
     _hSecondRowLayout.appendLayout(_vDonutLayout);
-
 }
 
 void MainView::arrangeThirdRowLayout() {
@@ -197,15 +194,11 @@ void MainView::arrangeThirdRowLayout() {
     _hThirdRowLayout.appendSpacer();
 }
 
-
-
-
 void MainView::arrangeTransactionHistoryLayout() {
     _tblTransactionHistory.setSize(gui::Size(500, 50));
     _hTransactionHistoryLayout.append(_tblTransactionHistory);
     arrangeExportButtonLayout();
     _hTransactionHistoryLayout.appendLayout(_vExportButtonLayout);
-
     _vTransactionHistoryLayout.append(_lblTransactionHistory);
     _vTransactionHistoryLayout.appendLayout(_hTransactionHistoryLayout);
 }
@@ -214,8 +207,6 @@ void MainView::arrangeExportButtonLayout() {
     _vExportButtonLayout.append(_btnExport, td::HAlignment::Left, td::VAlignment::Top);
     _vExportButtonLayout.append(_btnDelete, td::HAlignment::Left, td::VAlignment::Bottom);
 }
-
-
 
 void MainView::arrangeVerticalCentralLayout(){
     _vCentralMainLayout.appendSpacer(1);
@@ -284,32 +275,33 @@ bool MainView::handleCancelButton() {
 }
 
 bool MainView::handleSaveButton() {
-    //TODO: make a category service for this stuff
-    // td::Variant categoryNameVar, categoryTypeVar, amountVar = _neAmount.getValue();
-    // _cbType.getValue(categoryTypeVar);
-    // _cbCategory.getValue(categoryNameVar);
-    //
-    // td::Decimal2 amount;
-    // td::INT4 categoryName, categoryType;
-    // td::Date date = _dateEdit.getValue();
-    //
-    // amountVar.getValue(amount);
-    // categoryNameVar.getValue(categoryName);
-    // categoryTypeVar.getValue(categoryType);
-    //
-    //
-    // Category category = _categoryRepository.findCategoryByNameAndType(
-    //                 ComponentUtils::getCategories()[categoryType][categoryName],
-    //                 from_string(ComponentUtils::getCategoriesTypes()[categoryType].c_str())
-    //             ).value();
-    //
-    // _transactionService.addNewTransaction(Transaction{0, _user, category, amount, "BAM", date, td::String()});
+    td::Decimal2 amount;
+    td::Date date = _dateEdit.getValue();
 
-    // reloadTable();
+    _neAmount.getValue().getValue(amount);
+    td::INT4 categoryName, categoryType;
+    setCategoryDataFromIndexes(categoryName, categoryType);
+
+    Category category = _categoryRepository.findCategoryByNameAndType(
+                    ComponentUtils::getCategories()[categoryType][categoryName],
+                    from_string(ComponentUtils::getCategoriesTypes()[categoryType].c_str())
+                ).value();
+
+    _transactionService.addNewTransaction(Transaction{0, _user, category, amount, "BAM", date, td::String()});
+
     reloadView();
     return true;
 }
 
+void MainView::setCategoryDataFromIndexes(td::INT4& name, td::INT4& type) {
+    td::Variant categoryNameVar, categoryTypeVar;
+
+    _cbType.getValue(categoryTypeVar);
+    _cbCategory.getValue(categoryNameVar);
+
+    categoryNameVar.getValue(name);
+    categoryTypeVar.getValue(type);
+}
 
 void MainView::reloadTable() {
     // TODO: to fix
@@ -332,7 +324,6 @@ bool MainView::handleExportButton() {
     showInfo(tr("success"), tr("successfulExport"));
     return true;
 }
-
 
 void MainView::reloadView() {
     //TODO: cache invalidation wont be neccessary, you can remove it from here and from TransactionService
@@ -357,6 +348,3 @@ td::String MainView::getBtnIncomeTitle(){
 td::String MainView::getBtnExpenseTitle(){
     return (tr("expense") + ":   " + formatDecimal2ToString(_transactionService.getSummary().getExpense())).strVal();
 }
-
-
-

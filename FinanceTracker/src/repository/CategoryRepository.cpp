@@ -14,7 +14,6 @@ void CategoryRepository::saveCategory(const Category& category){
     td::Variant b_name(td::string8, td::nch, 30);
     td::Variant b_type(td::string8, td::nch, 10);
 
-
     dp::Params params(saveStatPtr->allocParams());
     params << b_name << b_type;
 

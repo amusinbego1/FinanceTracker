@@ -63,7 +63,6 @@ std::map<td::INT4, ServiceUtils::Summary> TransactionService::getMonthlyBreakdow
     return monthlyData;
 }
 
-
 std::map<td::INT4, ServiceUtils::Summary> TransactionService::getDailyBreakdown(td::INT4 year, td::INT4 month) {
     std::map<td::INT4, ServiceUtils::Summary> dailyData;
     const auto &transactions = cache_.findAllTransactions(user_);

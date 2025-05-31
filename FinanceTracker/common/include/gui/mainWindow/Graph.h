@@ -12,9 +12,8 @@
 #include <utility/ServiceUtils.h>
 
 class Graph : public gui::Canvas {
-    const int _y_max = 160, _x_max = 480 + 60, _step = 40, _radius = 4, _x_begin = 60;
-    gui::Shape _xAxis;
-    gui::Shape _yAxis;
+    const int _y_max = 160, _x_max = 480 + 60, _step = 40, _radius = 4, _x_begin = 60, _y_begin = 7;
+    gui::Shape _xAxis, _yAxis;
     gui::Shape _circles;
     gui::Shape _dashes[5];
     TransactionService &_transactionService;
