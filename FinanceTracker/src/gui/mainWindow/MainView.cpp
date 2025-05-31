@@ -326,8 +326,6 @@ bool MainView::handleExportButton() {
 }
 
 void MainView::reloadView() {
-    //TODO: cache invalidation wont be neccessary, you can remove it from here and from TransactionService
-    _transactionService.invalidateCache();
     _graph.updateData();
     _pie.updateData();
     _btnBalance.setTitle(getBtnBalanceTitle());
