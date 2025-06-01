@@ -33,9 +33,9 @@ void Graph::drawGraphData() {
 }
 
 void Graph::paintAndDrawCircles(gui::Shape &circle, double y_val) {
-    if (!std::strcmp(_dataType.c_str(), "Expense") || y_val > _y_max)
+    if (!std::strcmp(_dataType.c_str(), "Expense") || isGreaterThan(y_val, _y_max))
         circle.drawFill(td::ColorID::Red);
-    else if (!std::strcmp(_dataType.c_str(), "Income") || y_val < _y_max)
+    else if (!std::strcmp(_dataType.c_str(), "Income") || isSmallerThan(y_val, _y_max))
         circle.drawFill(td::ColorID::DodgerBlue);
     else
         circle.drawFill(td::ColorID::SysText);

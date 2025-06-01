@@ -69,7 +69,16 @@ inline const char* to_string(td::ColorID color_id) {
     }
 }
 
+inline bool areEqual(double x, double y, double eps = 1e-10) {
+    return (std::fabs(x - y) <= eps*(std::fabs(x) + std::fabs(y)));
+}
 
+inline bool isSmallerThan(double x, double y, double eps = 1e-10) {
+    return (x<y) && !areEqual(x, y, eps);
+}
 
+inline bool isGreaterThan(double x, double y, double eps = 1e-10) {
+    return (x>y) && !areEqual(x, y, eps);
+}
 
 #endif //SERVICEUTILS_H
