@@ -25,10 +25,21 @@ void Graph::drawGraphData() {
             _labels[i] = formatDecimal2ToString(maxData - maxData / 4 * (i));
             _labels[i].draw(gui::Point(0, i * _step), gui::Font::ID::SystemSmaller, td::ColorID::SysText);
         }
-        points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_begin + _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData)), _radius);
+        double y_val = _y_max * (1 - getData[_dataType](_breakdown[i + 1]) / maxData);
+        points[i] = gui::Circle(gui::Point(_x_begin + i * _step, _y_begin + y_val), _radius);
+        _circles[i].createCircle(points[i]);
+        paintAndDrawCircles(_circles[i], y_val);
     }
 }
 
+void Graph::paintAndDrawCircles(gui::Shape &circle, double y_val) {
+    if (!std::strcmp(_dataType.c_str(), "Expense") || y_val > _y_max)
+        circle.drawFill(td::ColorID::Red);
+    else if (!std::strcmp(_dataType.c_str(), "Income") || y_val < _y_max)
+        circle.drawFill(td::ColorID::DodgerBlue);
+    else
+        circle.drawFill(td::ColorID::SysText);
+}
 
 Graph::Graph(const User& user): _transactionService(TransactionService::getInstance(user)), _dataType("Balance") {
     _yAxis.createLines(new gui::Point[2]{gui::Point(_x_begin, _y_begin), gui::Point(_x_begin, _y_begin + _y_max)}, 2);
@@ -49,9 +60,6 @@ void Graph::onDraw(const gui::Rect &rect)  {
     }
 
     drawGraphData();
-
-    _circles.createCircles(points, 12);
-    _circles.drawFill(td::ColorID::DodgerBlue);
 }
 
 

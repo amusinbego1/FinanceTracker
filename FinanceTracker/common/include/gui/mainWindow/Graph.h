@@ -14,10 +14,10 @@
 class Graph : public gui::Canvas {
     const int _y_max = 160, _x_max = 480 + 60, _step = 40, _radius = 4, _x_begin = 60, _y_begin = 7;
     gui::Shape _xAxis, _yAxis;
-    gui::Shape _circles;
     gui::Shape _dashes[5];
     TransactionService &_transactionService;
     std::map<int, ServiceUtils::Summary> _breakdown;
+    gui::Shape _circles[12];
     gui::Circle points[12];
     const gui::DrawableString _months[12]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     gui::DrawableString _labels[5];
@@ -33,6 +33,7 @@ class Graph : public gui::Canvas {
 
     double getMaxOfData();
     void drawGraphData();
+    void paintAndDrawCircles(gui::Shape& circle, double y_val);
 
 public:
     explicit Graph(const User& user);
