@@ -25,16 +25,16 @@ class RegisterView : public gui::View
     void arrangeMainHorizontalLayout();
     bool handleClickOnRegisterButton();
     bool isValidRegisterInput(const td::String& username, const td::String& password, const td::String& confirmPassword);
-    void showWarningForInvalidUsername();
-    void hideWarningForInvalidUsername();
-    void showWarningForInvalidPassword();
-    void hideWarningForInvalidPassword();
+    void showWarning(gui::Label& label);
+    void hideWarning(gui::Label& label);
+    bool doesUsernameAlreadyExists(const td::String& username);
     void registerNewUser(const td::String& username, const td::String& password);
     void showInfoForValidCredentials(const td::String& username);
     void cleanInputs();
 protected:
     gui::Label _lblUsername;
     gui::Label _lblTooShortUsername;
+    gui::Label _lblUsernameAlreadyExists;
     gui::LineEdit _lnUsername;
 
     gui::Label _lblPassword;

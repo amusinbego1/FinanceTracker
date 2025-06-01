@@ -24,11 +24,13 @@ public:
     void saveUser(const User&);
     std::optional<User> findUserByUsernameAndPassword(const td::String& username, const td::String& password);
     void deleteUserByUsernameAndPassword(const td::String& username, const td::String& password);
+    td::INT4 countUsersByUsername(const td::String&);
     //
 
 private:
     static const char * INSERT_USER_SQL;
     static const char * FIND_USER_BY_USERNAME_AND_PASSWORD_SQL;
+    static const char * COUNT_USERS_BY_USERNAME_SQL;
     static const char * DELETE_USER_BY_ID;
 
     UserRepository() = default;

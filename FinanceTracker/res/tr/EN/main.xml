@@ -7,6 +7,7 @@
 		<Res id="register" tr="Register"/>
 		<Res id="cancel" tr="Cancel"/>
 		<Res id="invalidUserWarning" tr="Incorrect username or password. Did you mean to register?"/>
+		<Res id="usernameAlreadyExists" tr="Username already exists. Try another one."/>
 		<Res id="username" tr="Username"/>
 		<Res id="tooShortUsername" tr="Username must be longer than 4 characters"/>
 		<Res id="password" tr="Password"/>

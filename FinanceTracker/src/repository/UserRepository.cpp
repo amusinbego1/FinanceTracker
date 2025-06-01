@@ -10,6 +10,7 @@
 const char* UserRepository::INSERT_USER_SQL = "INSERT INTO users (username, password) VALUES (?, ?)";
 const char* UserRepository::FIND_USER_BY_USERNAME_AND_PASSWORD_SQL = "SELECT id FROM users WHERE username = ? AND password = ?";
 const char* UserRepository::DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?";
+const char* UserRepository::COUNT_USERS_BY_USERNAME_SQL = "SELECT COUNT(*) users_count FROM users WHERE username = ?";
 
 td::String UserRepository::encryptPassword(const td::String &password) {
     crpt::SHA256 sha256;
@@ -63,6 +64,28 @@ std::optional<User> UserRepository::findUserByUsernameAndPassword(const td::Stri
 
     return User{user_id, username, encryptedPassword};
 }
+
+td::INT4 UserRepository::countUsersByUsername(const td::String &username) {
+    td::INT4 users_count;
+
+    dp::IStatementPtr pStatPtr(_databasePtr->createStatement(COUNT_USERS_BY_USERNAME_SQL));
+
+    td::Variant b_username(td::string8, td::nch, 30);
+
+    dp::Columns columns(pStatPtr->allocBindColumns(1));
+    columns << "users_count" << users_count;
+
+    dp::Params params(pStatPtr->allocParams());
+    params << b_username;
+
+    b_username = username;
+
+    if (!pStatPtr->execute() || !pStatPtr->moveNext())
+        throw std::exception("Something went wrong getting users count");
+
+    return users_count;
+}
+
 
 User UserRepository::findUserForDeletion(dp::Transaction& transaction, const td::String& username, const td::String& password) {
     auto userOptional = findUserByUsernameAndPassword(username,password);

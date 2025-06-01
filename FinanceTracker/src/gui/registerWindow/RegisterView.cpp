@@ -11,6 +11,7 @@
 RegisterView::RegisterView()
     : _lblUsername(tr("username"))
     , _lblTooShortUsername(tr("tooShortUsername"))
+    , _lblUsernameAlreadyExists(tr("usernameAlreadyExists"))
 
     , _lblPassword(tr("password"))
     , _lblConfirmPassword(tr("confirmPassword"))
@@ -21,7 +22,7 @@ RegisterView::RegisterView()
 
     , _hLayout(3)
     , _buttonHLayout(2)
-    , _vLayout(10)
+    , _vLayout(11)
 {
    arrangeElements();
 }
@@ -39,6 +40,7 @@ void RegisterView::setStyles() {
     _btnRegister.setAsDefault();
     ComponentUtils::setLabelWarningStyle(_lblInvalidPassword);
     ComponentUtils::setLabelWarningStyle(_lblTooShortUsername);
+    ComponentUtils::setLabelWarningStyle(_lblUsernameAlreadyExists);
 }
 
 void RegisterView::arrangeButtonLayout() {
@@ -52,6 +54,7 @@ void RegisterView::arrangeVerticalInputLayout() {
     _vLayout.append(_lblUsername, td::HAlignment::Left);
     _vLayout.append(_lnUsername);
     _vLayout.append(_lblTooShortUsername, td::HAlignment::Left);
+    _vLayout.append(_lblUsernameAlreadyExists, td::HAlignment::Left);
 
     _vLayout.appendSpacer(1);
 
@@ -113,18 +116,22 @@ void RegisterView::showInfoForValidCredentials(const td::String& username) {
 
 bool RegisterView::isValidRegisterInput(const td::String& username, const td::String& password, const td::String& confirmPassword) {
     if (username.length() <= 4) {
-        showWarningForInvalidUsername();
+        showWarning(_lblTooShortUsername);
         return false;
     }
-
-    hideWarningForInvalidUsername();
+    hideWarning(_lblTooShortUsername);
 
     if (password != confirmPassword) {
-        showWarningForInvalidPassword();
+        showWarning(_lblInvalidPassword);
         return false;
     }
+    hideWarning(_lblInvalidPassword);
 
-    hideWarningForInvalidPassword();
+    if (doesUsernameAlreadyExists(username)) {
+        showWarning(_lblUsernameAlreadyExists);
+        return false;
+    }
+    hideWarning(_lblUsernameAlreadyExists);
 
     return true;
 }
@@ -134,24 +141,21 @@ void RegisterView::registerNewUser(const td::String& username, const td::String&
     userRepo.saveUser(User{0, username, password});
 }
 
-void RegisterView::showWarningForInvalidUsername() {
-    _lblTooShortUsername.hide(false, true);
+bool RegisterView::doesUsernameAlreadyExists(const td::String &username) {
+    auto& userRepo = UserRepository::getInstance();
+    return userRepo.countUsersByUsername(username) > 0;
+}
+
+
+void RegisterView::showWarning(gui::Label& label) {
+    label.hide(false, true);
     cleanInputs();
 }
 
-void RegisterView::hideWarningForInvalidUsername() {
-    _lblTooShortUsername.hide(true, true);
+void RegisterView::hideWarning(gui::Label& label) {
+    label.hide(true, true);
 }
 
-
-void RegisterView::showWarningForInvalidPassword() {
-    _lblInvalidPassword.hide(false, true);
-    cleanInputs();
-}
-
-void RegisterView::hideWarningForInvalidPassword() {
-    _lblInvalidPassword.hide(true, true);
-}
 
 void RegisterView::cleanInputs() {
     _lnUsername.clean();
